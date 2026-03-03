@@ -1,640 +1,547 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="Portafolio de SmartNet - Soluciones tecnológicas innovadoras que impulsan tu negocio."
-    />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portafolio de SmartNet - Soluciones tecnológicas innovadoras que impulsan tu negocio.">
     <title>SmartNet | Tecnologías Innovadoras</title>
-
+    
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-
+    
     <!-- Fonts -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap"
-      rel="stylesheet"
-    />
-
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
     <!-- AOS.js -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css"
-      rel="stylesheet"
-    />
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
-    <!-- Font Awesome for Icons -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-    />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <style>
-      body {
-        font-family: "Outfit", sans-serif;
-        scroll-behavior: smooth;
-        overflow-x: hidden;
-      }
-
-      /* Progress Bar */
-      #progress-bar {
-        position: fixed;
-        top: 0;
-        left: 0;
-        height: 4px;
-        background: linear-gradient(to right, #4f46e5, #9333ea, #22c55e);
-        width: 0%;
-        z-index: 1000;
-        transition: width 0.1s ease;
-      }
-
-      /* Hero Animations */
-      @keyframes slideInUp {
-        from {
-          transform: translateY(50px);
-          opacity: 0;
+        body {
+            font-family: 'Outfit', sans-serif;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
         }
-        to {
-          transform: translateY(0);
-          opacity: 1;
+
+        /* Progress Bar */
+        #progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background: linear-gradient(to right, #4f46e5, #9333ea, #22c55e);
+            width: 0%;
+            z-index: 1000;
+            transition: width 0.1s ease;
         }
-      }
 
-      .hero-animate {
-        animation: slideInUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-      }
-
-      /* Isometric Card Hover */
-      .service-card {
-        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      }
-
-      .service-card:hover {
-        transform: translateY(-10px) scale(1.02);
-        box-shadow: 0 25px 50px -12px rgba(79, 70, 229, 0.2);
-      }
-
-      /* Infinite Carousel */
-      @keyframes scroll {
-        0% {
-          transform: translateX(0);
+        /* Hero Slider Customization */
+        .hero-swiper {
+            width: 100%;
+            height: 90vh;
+            min-height: 700px;
         }
-        100% {
-          transform: translateX(calc(-250px * 7));
+
+        .swiper-slide {
+            padding-top: 80px;
+            display: flex;
+            align-items: center;
         }
-      }
 
-      .slider {
-        background: white;
-        height: 100px;
-        margin: auto;
-        overflow: hidden;
-        position: relative;
-        width: 100%;
-      }
+        .hero-content {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
 
-      .slider .slide-track {
-        animation: scroll 40s linear infinite;
-        display: flex;
-        width: calc(250px * 14);
-      }
+        .swiper-slide-active .hero-content {
+            opacity: 1;
+            transform: translateY(0);
+        }
 
-      .slider .slide {
-        height: 100px;
-        width: 250px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
+        .hero-image {
+            opacity: 0;
+            transform: scale(0.85) translateX(50px);
+            transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+            transition-delay: 0.2s;
+        }
 
-      .slider .slide img {
-        width: 140px;
-        filter: grayscale(100%);
-        opacity: 0.6;
-        transition: all 0.3s ease;
-      }
+        .swiper-slide-active .hero-image {
+            opacity: 1;
+            transform: scale(1) translateX(0);
+        }
 
-      .slider .slide img:hover {
-        filter: grayscale(0%);
-        opacity: 1;
-        transform: scale(1.1);
-      }
+        .swiper-pagination-bullet {
+            width: 10px;
+            height: 10px;
+            background: #4f46e5;
+            opacity: 0.2;
+            transition: all 0.3s ease;
+        }
 
-      /* Custom Scrollbar */
-      ::-webkit-scrollbar {
-        width: 8px;
-      }
-      ::-webkit-scrollbar-track {
-        background: #f1f1f1;
-      }
-      ::-webkit-scrollbar-thumb {
-        background: #4f46e5;
-        border-radius: 10px;
-      }
-      ::-webkit-scrollbar-thumb:hover {
-        background: #3730a3;
-      }
+        .swiper-pagination-bullet-active {
+            opacity: 1;
+            width: 35px;
+            border-radius: 5px;
+        }
 
-      /* Glassmorphism Navigation */
-      nav {
-        backdrop-filter: blur(10px);
-        background: rgba(255, 255, 255, 0.8);
-      }
+        /* Glassmorphism Navigation */
+        nav {
+            backdrop-filter: blur(15px);
+            background: rgba(255, 255, 255, 0.7);
+        }
 
-      .gradient-text {
-        background: linear-gradient(135deg, #4f46e5 0%, #9333ea 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-      }
+        .gradient-text {
+            background: linear-gradient(135deg, #4f46e5 0%, #9333ea 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
-      .gradient-bg {
-        background: linear-gradient(
-          135deg,
-          #4f46e5 0%,
-          #7c3aed 50%,
-          #2563eb 100%
-        );
-      }
+        /* Isometric Card Hover */
+        .service-card {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 25px 50px -12px rgba(79, 70, 229, 0.2);
+        }
+
+        /* Infinite Carousel */
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(calc(-250px * 7)); }
+        }
+
+        .slider .slide-track {
+            animation: scroll 40s linear infinite;
+            display: flex;
+            width: calc(250px * 14);
+        }
+
+        .slider .slide {
+            height: 100px;
+            width: 250px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .slider .slide img {
+            width: 140px;
+            filter: grayscale(100%);
+            opacity: 0.5;
+            transition: all 0.4s ease;
+        }
+
+        .slider .slide img:hover {
+            filter: grayscale(0%);
+            opacity: 1;
+            transform: scale(1.1);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f8fafc;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
+            border: 3px solid #f8fafc;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #4f46e5;
+        }
+
+        /* Floating elements animation */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
     </style>
-  </head>
-  <body class="bg-slate-50 text-slate-900">
+</head>
+<body class="bg-slate-50 text-slate-900">
+
     <!-- Progress Bar -->
     <div id="progress-bar"></div>
 
     <!-- Navigation -->
-    <nav class="fixed w-full z-50 border-b border-white/20">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between items-center h-16">
-          <div class="flex items-center gap-2">
-            <img
-              src="assets/logo.png"
-              alt="SmartNet Logo"
-              class="h-10 w-auto"
-            />
-            <span class="text-2xl font-bold tracking-tight text-indigo-600"
-              >SmartNet</span
-            >
-          </div>
-          <div class="hidden md:flex space-x-8">
-            <a
-              href="#inicio"
-              class="text-sm font-semibold hover:text-indigo-600 transition"
-              >Inicio</a
-            >
-            <a
-              href="#servicios"
-              class="text-sm font-semibold hover:text-indigo-600 transition"
-              >Servicios</a
-            >
-            <a
-              href="#casos-exito"
-              class="text-sm font-semibold hover:text-indigo-600 transition"
-              >Casos de Éxito</a
-            >
-            <a
-              href="#contacto"
-              class="text-sm font-semibold bg-indigo-600 text-white px-5 py-2 rounded-full hover:bg-indigo-700 transition"
-              >Contáctanos</a
-            >
-          </div>
+    <nav class="fixed w-full z-50 border-b border-indigo-50/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex items-center gap-3">
+                    <img src="assets/logo.png" alt="SmartNet Logo" class="h-12 w-auto">
+                    <span class="text-2xl font-bold tracking-tight text-indigo-600">SmartNet</span>
+                </div>
+                <div class="hidden md:flex items-center space-x-10">
+                    <a href="#inicio" class="text-sm font-semibold hover:text-indigo-600 transition">Inicio</a>
+                    <a href="#servicios" class="text-sm font-semibold hover:text-indigo-600 transition">Servicios</a>
+                    <a href="#casos-exito" class="text-sm font-semibold hover:text-indigo-600 transition">Casos de Éxito</a>
+                    <a href="#contacto" class="text-sm font-semibold bg-indigo-600 text-white px-7 py-3 rounded-2xl hover:bg-indigo-700 transition shadow-xl shadow-indigo-200">Contáctanos</a>
+                </div>
+            </div>
         </div>
-      </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section
-      id="inicio"
-      class="relative pt-32 pb-20 md:pt-48 md:pb-40 overflow-hidden"
-    >
-      <div
-        class="absolute top-0 right-0 -z-10 opacity-20 transform translate-x-1/4 -translate-y-1/4"
-      >
-        <div
-          class="w-[800px] h-[800px] rounded-full gradient-bg blur-[100px]"
-        ></div>
-      </div>
+    <!-- Hero Slider Section -->
+    <section id="inicio" class="relative overflow-hidden bg-white">
+        <div class="swiper hero-swiper">
+            <div class="swiper-wrapper">
+                
+                <!-- Slide 1: AI Security -->
+                <div class="swiper-slide">
+                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full grid grid-cols-1 lg:grid-cols-2 items-center gap-16">
+                        <div class="hero-content">
+                            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-50 text-indigo-600 font-bold text-xs uppercase tracking-widest mb-6">
+                                <span class="relative flex h-2 w-2">
+                                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
+                                    <span class="relative inline-flex rounded-full h-2 w-2 bg-indigo-600"></span>
+                                </span>
+                                Inteligencia Artificial de Vanguardia
+                            </div>
+                            <h1 class="text-5xl md:text-7xl font-bold mb-8 leading-[1.1]">
+                                Seguridad Electrónica <br><span class="gradient-text">Asistida por IA</span>
+                            </h1>
+                            <p class="text-xl text-slate-600 mb-12 leading-relaxed max-w-lg">
+                                Detectamos y prevenimos incidentes en tiempo real con algoritmos de visión artificial y control biométrico avanzado.
+                            </p>
+                            <div class="flex flex-wrap gap-5">
+                                <a href="#servicios" class="px-10 py-5 bg-indigo-600 text-white font-bold rounded-[22px] shadow-2xl shadow-indigo-200 hover:bg-indigo-700 hover:-translate-y-1 transition duration-300">
+                                    Explorar Soluciones
+                                </a>
+                                <a href="#contacto" class="px-10 py-5 border-2 border-indigo-50 text-indigo-600 font-bold rounded-[22px] hover:bg-white hover:border-indigo-600 hover:-translate-y-1 transition duration-300">
+                                    Solicitar Demo
+                                </a>
+                            </div>
+                        </div>
+                        <div class="hero-image relative">
+                            <div class="absolute -z-10 bg-indigo-100 w-[140%] h-[140%] rounded-full blur-[120px] -top-20 -left-20 opacity-40"></div>
+                            <img src="assets/hero-seguridad.png" alt="Smart Security" class="w-full h-auto drop-shadow-[0_35px_35px_rgba(79,70,229,0.3)] floating">
+                        </div>
+                    </div>
+                </div>
 
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <div class="hero-animate opacity-0" style="animation-delay: 0.2s">
-          <img
-            src="assets/logo.png"
-            alt="SmartNet Logo Large"
-            class="mx-auto h-24 mb-8 drop-shadow-2xl"
-          />
-          <h1 class="text-5xl md:text-7xl font-bold mb-6 tracking-tight">
-            Conecta, Protege y <span class="gradient-text">Transforma</span> tu
-            Empresa
-          </h1>
-          <p
-            class="text-xl md:text-2xl text-slate-600 mb-10 max-w-3xl mx-auto leading-relaxed"
-          >
-            Tecnologías innovadoras que impulsan tu negocio hacia el futuro
-            digital.
-          </p>
-          <div class="flex flex-col sm:flex-row justify-center gap-4">
-            <a
-              href="#servicios"
-              class="px-8 py-4 bg-indigo-600 text-white font-bold rounded-2xl shadow-lg shadow-indigo-200 hover:bg-indigo-700 hover:-translate-y-1 transition duration-300"
-            >
-              Nuestros Servicios
-            </a>
-            <a
-              href="#contacto"
-              class="px-8 py-4 bg-white text-indigo-600 border-2 border-indigo-50 font-bold rounded-2xl hover:bg-indigo-50 hover:-translate-y-1 transition duration-300"
-            >
-              Contáctanos
-            </a>
-          </div>
+                <!-- Slide 2: Cybersecurity & Audit -->
+                <div class="swiper-slide">
+                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full grid grid-cols-1 lg:grid-cols-2 items-center gap-16">
+                        <div class="hero-content">
+                            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-50 text-purple-600 font-bold text-xs uppercase tracking-widest mb-6">
+                                Resiliencia Digital
+                            </div>
+                            <h1 class="text-5xl md:text-7xl font-bold mb-8 leading-[1.1]">
+                                Soluciones de <br><span class="text-purple-600">Ciberseguridad</span>
+                            </h1>
+                            <p class="text-xl text-slate-600 mb-12 leading-relaxed max-w-lg">
+                                Auditorías IT profundas y blindaje de infraestructura para proteger su empresa contra las amenazas digitales más sofisticadas.
+                            </p>
+                            <div class="flex flex-wrap gap-5">
+                                <a href="#servicios" class="px-10 py-5 bg-purple-600 text-white font-bold rounded-[22px] shadow-2xl shadow-purple-200 hover:bg-purple-700 hover:-translate-y-1 transition duration-300">
+                                    Auditoría & Blindaje
+                                </a>
+                            </div>
+                        </div>
+                        <div class="hero-image relative">
+                            <div class="absolute -z-10 bg-purple-100 w-[140%] h-[140%] rounded-full blur-[120px] -top-20 -left-20 opacity-40"></div>
+                            <img src="assets/hero-cyber.png" alt="Cybersecurity" class="w-full h-auto drop-shadow-[0_35px_35px_rgba(147,51,234,0.3)] floating">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 3: Automation & Dev -->
+                <div class="swiper-slide">
+                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full grid grid-cols-1 lg:grid-cols-2 items-center gap-16">
+                        <div class="hero-content">
+                            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-50 text-blue-600 font-bold text-xs uppercase tracking-widest mb-6">
+                                Innovación Continua
+                            </div>
+                            <h1 class="text-5xl md:text-7xl font-bold mb-8 leading-[1.1]">
+                                Automatización <br><span class="text-blue-600">& Desarrollo</span>
+                            </h1>
+                            <p class="text-xl text-slate-600 mb-12 leading-relaxed max-w-lg">
+                                Transformamos procesos manuales en flujos digitales optimizados. Software a medida que impulsa la productividad real.
+                            </p>
+                            <div class="flex flex-wrap gap-5">
+                                <a href="#contacto" class="px-10 py-5 bg-blue-600 text-white font-bold rounded-[22px] shadow-2xl shadow-blue-200 hover:bg-blue-700 hover:-translate-y-1 transition duration-300">
+                                    Automatice su Negocio
+                                </a>
+                            </div>
+                        </div>
+                        <div class="hero-image relative">
+                            <div class="absolute -z-10 bg-blue-100 w-[140%] h-[140%] rounded-full blur-[120px] -top-20 -left-20 opacity-40"></div>
+                            <img src="assets/hero-automation.png" alt="Automation" class="w-full h-auto drop-shadow-[0_35px_35px_rgba(37,99,235,0.3)] floating">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- Pagination -->
+            <div class="swiper-pagination"></div>
+            <!-- Navigation -->
+            <div class="swiper-button-next !text-indigo-600/30 hover:!text-indigo-600 transition mr-4"></div>
+            <div class="swiper-button-prev !text-indigo-600/30 hover:!text-indigo-600 transition ml-4"></div>
         </div>
-      </div>
     </section>
 
     <!-- Services Section -->
-    <section id="servicios" class="py-24 bg-white">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-20" data-aos="fade-up">
-          <h2
-            class="text-indigo-600 font-bold tracking-widest uppercase text-sm mb-4"
-          >
-            Lo que hacemos
-          </h2>
-          <h3 class="text-4xl md:text-5xl font-bold mb-6">
-            Nuestros Servicios
-          </h3>
-          <p class="text-slate-500 max-w-2xl mx-auto text-lg">
-            Ofrecemos soluciones integrales diseñadas para optimizar cada
-            aspecto tecnológico de su organización.
-          </p>
+    <section id="servicios" class="py-32 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-24" data-aos="fade-up">
+                <h2 class="text-indigo-600 font-bold tracking-widest uppercase text-xs mb-4">Portafolio de Soluciones</h2>
+                <h3 class="text-4xl md:text-6xl font-bold mb-8">Servicios Especializados</h3>
+                <p class="text-slate-500 max-w-2xl mx-auto text-xl leading-relaxed">
+                    Tecnología de punta diseñada para solventar los desafíos más críticos de las empresas modernas.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                <!-- Card 1 -->
+                <div class="service-card bg-slate-50/50 p-10 rounded-[40px] border border-slate-100" data-aos="fade-up" data-aos-delay="100">
+                    <div class="bg-white w-28 h-28 rounded-3xl flex items-center justify-center mb-8 shadow-xl shadow-slate-100">
+                        <img src="assets/software.png" alt="Software Development" class="w-20 h-20 object-contain">
+                    </div>
+                    <h4 class="text-2xl font-bold mb-5">Desarrollo de Software</h4>
+                    <p class="text-slate-600 leading-relaxed text-lg">
+                        Soluciones nativas y web de alta complejidad, escalables y orientadas a la experiencia de usuario.
+                    </p>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="service-card bg-slate-50/50 p-10 rounded-[40px] border border-slate-100" data-aos="fade-up" data-aos-delay="200">
+                    <div class="bg-white w-28 h-28 rounded-3xl flex items-center justify-center mb-8 shadow-xl shadow-slate-100">
+                        <img src="assets/seguridad.png" alt="Seguridad Electrónica" class="w-20 h-20 object-contain">
+                    </div>
+                    <h4 class="text-2xl font-bold mb-5">Seguridad Electrónica</h4>
+                    <p class="text-slate-600 leading-relaxed text-lg">
+                        Protección perimetral, videovigilancia inteligente y sistemas de alarma de grado militar.
+                    </p>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="service-card bg-slate-50/50 p-10 rounded-[40px] border border-slate-100" data-aos="fade-up" data-aos-delay="300">
+                    <div class="bg-white w-28 h-28 rounded-3xl flex items-center justify-center mb-8 shadow-xl shadow-slate-100">
+                        <img src="assets/ciberseguridad.png" alt="Ciberseguridad" class="w-20 h-20 object-contain">
+                    </div>
+                    <h4 class="text-2xl font-bold mb-5">Ciberseguridad</h4>
+                    <p class="text-slate-600 leading-relaxed text-lg">
+                        Seguridad de red, protección de endpoints y planes de respuesta ante incidentes cibernéticos.
+                    </p>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="service-card bg-slate-50/50 p-10 rounded-[40px] border border-slate-100" data-aos="fade-up" data-aos-delay="400">
+                    <div class="bg-white w-28 h-28 rounded-3xl flex items-center justify-center mb-8 shadow-xl shadow-slate-100">
+                        <img src="assets/redes.png" alt="Infraestructura de Redes" class="w-20 h-20 object-contain">
+                    </div>
+                    <h4 class="text-2xl font-bold mb-5">Infraestructura de Redes</h4>
+                    <p class="text-slate-600 leading-relaxed text-lg">
+                        Diseño de centros de datos, cableado estructurado y redes inalámbricas empresariales.
+                    </p>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="service-card bg-slate-50/50 p-10 rounded-[40px] border border-slate-100" data-aos="fade-up" data-aos-delay="500">
+                    <div class="bg-white w-28 h-28 rounded-3xl flex items-center justify-center mb-8 shadow-xl shadow-slate-100">
+                        <img src="assets/nube.png" alt="Servicios en Nube" class="w-20 h-20 object-contain">
+                    </div>
+                    <h4 class="text-2xl font-bold mb-5">Servicios en Nube</h4>
+                    <p class="text-slate-600 leading-relaxed text-lg">
+                        Migración híbrida, almacenamiento masivo y backup en la nube con disponibilidad del 99.9%.
+                    </p>
+                </div>
+
+                <!-- Card 6 -->
+                <div class="service-card bg-slate-50/50 p-10 rounded-[40px] border border-slate-100" data-aos="fade-up" data-aos-delay="600">
+                    <div class="bg-white w-28 h-28 rounded-3xl flex items-center justify-center mb-8 shadow-xl shadow-slate-100">
+                        <img src="assets/energia.png" alt="Energía Renovable y UPS" class="w-20 h-20 object-contain">
+                    </div>
+                    <h4 class="text-2xl font-bold mb-5">Sistemas de Energía</h4>
+                    <p class="text-slate-600 leading-relaxed text-lg">
+                        UPS industriales y soluciones de energía solar para garantizar la operatividad continua.
+                    </p>
+                </div>
+            </div>
         </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-          <!-- Card 1 -->
-          <div
-            class="service-card bg-slate-50 p-8 rounded-3xl border border-slate-100"
-            data-aos="fade-up"
-            data-aos-delay="100"
-          >
-            <div
-              class="bg-white w-24 h-24 rounded-2xl flex items-center justify-center mb-6 shadow-sm"
-            >
-              <img
-                src="assets/software.png"
-                alt="Software Development"
-                class="w-20 h-20 object-contain"
-              />
-            </div>
-            <h4 class="text-2xl font-bold mb-4">Desarrollo de Software</h4>
-            <p class="text-slate-600 leading-relaxed">
-              Creamos aplicaciones robustas y escalables adaptadas a las
-              necesidades específicas de su negocio e industria.
-            </p>
-          </div>
-
-          <!-- Card 2 -->
-          <div
-            class="service-card bg-slate-50 p-8 rounded-3xl border border-slate-100"
-            data-aos="fade-up"
-            data-aos-delay="200"
-          >
-            <div
-              class="bg-white w-24 h-24 rounded-2xl flex items-center justify-center mb-6 shadow-sm"
-            >
-              <img
-                src="assets/seguridad.png"
-                alt="Seguridad Electrónica"
-                class="w-20 h-20 object-contain"
-              />
-            </div>
-            <h4 class="text-2xl font-bold mb-4">Seguridad Electrónica</h4>
-            <p class="text-slate-600 leading-relaxed">
-              Sistemas de videovigilancia avanzados, control de acceso y
-              monitoreo para proteger sus activos más valiosos.
-            </p>
-          </div>
-
-          <!-- Card 3 -->
-          <div
-            class="service-card bg-slate-50 p-8 rounded-3xl border border-slate-100"
-            data-aos="fade-up"
-            data-aos-delay="300"
-          >
-            <div
-              class="bg-white w-24 h-24 rounded-2xl flex items-center justify-center mb-6 shadow-sm"
-            >
-              <img
-                src="assets/ciberseguridad.png"
-                alt="Ciberseguridad"
-                class="w-20 h-20 object-contain"
-              />
-            </div>
-            <h4 class="text-2xl font-bold mb-4">Ciberseguridad</h4>
-            <p class="text-slate-600 leading-relaxed">
-              Blindaje digital completo para prevenir ataques y proteger la
-              integridad de sus datos y comunicaciones.
-            </p>
-          </div>
-
-          <!-- Card 4 -->
-          <div
-            class="service-card bg-slate-50 p-8 rounded-3xl border border-slate-100"
-            data-aos="fade-up"
-            data-aos-delay="400"
-          >
-            <div
-              class="bg-white w-24 h-24 rounded-2xl flex items-center justify-center mb-6 shadow-sm"
-            >
-              <img
-                src="assets/redes.png"
-                alt="Infraestructura de Redes"
-                class="w-20 h-20 object-contain"
-              />
-            </div>
-            <h4 class="text-2xl font-bold mb-4">Infraestructura de Redes</h4>
-            <p class="text-slate-600 leading-relaxed">
-              Diseño e implementación de redes de alta velocidad, estables y
-              seguras para una conectividad sin límites.
-            </p>
-          </div>
-
-          <!-- Card 5 -->
-          <div
-            class="service-card bg-slate-50 p-8 rounded-3xl border border-slate-100"
-            data-aos="fade-up"
-            data-aos-delay="500"
-          >
-            <div
-              class="bg-white w-24 h-24 rounded-2xl flex items-center justify-center mb-6 shadow-sm"
-            >
-              <img
-                src="assets/nube.png"
-                alt="Servicios en Nube"
-                class="w-20 h-20 object-contain"
-              />
-            </div>
-            <h4 class="text-2xl font-bold mb-4">Servicios en Nube</h4>
-            <p class="text-slate-600 leading-relaxed">
-              Migración y gestión de entornos cloud para aumentar la agilidad,
-              accesibilidad y eficiencia operativa de su empresa.
-            </p>
-          </div>
-
-          <!-- Card 6 -->
-          <div
-            class="service-card bg-slate-50 p-8 rounded-3xl border border-slate-100"
-            data-aos="fade-up"
-            data-aos-delay="600"
-          >
-            <div
-              class="bg-white w-24 h-24 rounded-2xl flex items-center justify-center mb-6 shadow-sm"
-            >
-              <img
-                src="assets/energia.png"
-                alt="Energía Renovable y UPS"
-                class="w-20 h-20 object-contain"
-              />
-            </div>
-            <h4 class="text-2xl font-bold mb-4">Energía Renovable y UPS</h4>
-            <p class="text-slate-600 leading-relaxed">
-              Soluciones de respaldo de energía y sistemas fotovoltaicos para
-              garantizar la continuidad del negocio y sostenibilidad.
-            </p>
-          </div>
-        </div>
-      </div>
     </section>
 
     <!-- Success Stories / Clients Carousel -->
-    <section id="casos-exito" class="py-24 bg-slate-50 overflow-hidden">
-      <div
-        class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-16"
-        data-aos="fade-up"
-      >
-        <h3 class="text-3xl font-bold mb-4">
-          Empresas que confían en nosotros
-        </h3>
-        <p class="text-slate-500 max-w-xl mx-auto">
-          Optimizamos la infraestructura de red y seguridad para empresas
-          líderes en Guatemala y la región.
-        </p>
-      </div>
-
-      <div class="slider">
-        <div class="slide-track">
-          <!-- Slide List -->
-          <div class="slide">
-            <img src="https://logo.clearbit.com/tigo.com" alt="Tigo" />
-          </div>
-          <div class="slide">
-            <img
-              src="https://logo.clearbit.com/bancoazteca.com.mx"
-              alt="Banco Azteca"
-            />
-          </div>
-          <div class="slide">
-            <img src="https://logo.clearbit.com/shell.com" alt="Shell" />
-          </div>
-          <div class="slide">
-            <img src="https://logo.clearbit.com/telus.com" alt="Telus" />
-          </div>
-          <div class="slide">
-            <img src="https://logo.clearbit.com/samsung.com" alt="Samsung" />
-          </div>
-          <div class="slide">
-            <img src="https://logo.clearbit.com/keplerapp.com" alt="Kepler" />
-          </div>
-          <div class="slide">
-            <img src="https://logo.clearbit.com/google.com" alt="Client" />
-          </div>
-          <!-- Placeholder for Saitafe -->
-
-          <!-- Repeat for infinite scroll -->
-          <div class="slide">
-            <img src="https://logo.clearbit.com/tigo.com" alt="Tigo" />
-          </div>
-          <div class="slide">
-            <img
-              src="https://logo.clearbit.com/bancoazteca.com.mx"
-              alt="Banco Azteca"
-            />
-          </div>
-          <div class="slide">
-            <img src="https://logo.clearbit.com/shell.com" alt="Shell" />
-          </div>
-          <div class="slide">
-            <img src="https://logo.clearbit.com/telus.com" alt="Telus" />
-          </div>
-          <div class="slide">
-            <img src="https://logo.clearbit.com/samsung.com" alt="Samsung" />
-          </div>
-          <div class="slide">
-            <img src="https://logo.clearbit.com/keplerapp.com" alt="Kepler" />
-          </div>
-          <div class="slide">
-            <img src="https://logo.clearbit.com/google.com" alt="Client" />
-          </div>
+    <section id="casos-exito" class="py-32 bg-slate-50 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-20" data-aos="fade-up">
+            <h3 class="text-4xl font-bold mb-6">Confianza Empresarial</h3>
+            <p class="text-slate-500 max-w-2xl mx-auto text-lg leading-relaxed">
+                Empoderamos a las organizaciones líderes de Guatemala con tecnología robusta y servicios de soporte proactivo.
+            </p>
         </div>
-      </div>
+
+        <div class="slider">
+            <div class="slide-track">
+                <!-- Slide List -->
+                <div class="slide"><img src="https://logo.clearbit.com/tigo.com.gt" alt="Tigo"></div>
+                <div class="slide"><img src="https://logo.clearbit.com/bancoazteca.com.gt" alt="Banco Azteca"></div>
+                <div class="slide"><img src="https://logo.clearbit.com/shell.com" alt="Shell"></div>
+                <div class="slide"><img src="https://logo.clearbit.com/telusinternational.com" alt="Telus"></div>
+                <div class="slide"><img src="https://logo.clearbit.com/samsung.com" alt="Samsung"></div>
+                <div class="slide"><img src="https://logo.clearbit.com/kepler.com" alt="Kepler"></div>
+                <div class="slide"><img src="https://logo.clearbit.com/google.com" alt="Client"></div>
+                
+                <!-- Repeat for infinite scroll -->
+                <div class="slide"><img src="https://logo.clearbit.com/tigo.com.gt" alt="Tigo"></div>
+                <div class="slide"><img src="https://logo.clearbit.com/bancoazteca.com.gt" alt="Banco Azteca"></div>
+                <div class="slide"><img src="https://logo.clearbit.com/shell.com" alt="Shell"></div>
+                <div class="slide"><img src="https://logo.clearbit.com/telusinternational.com" alt="Telus"></div>
+                <div class="slide"><img src="https://logo.clearbit.com/samsung.com" alt="Samsung"></div>
+                <div class="slide"><img src="https://logo.clearbit.com/kepler.com" alt="Kepler"></div>
+                <div class="slide"><img src="https://logo.clearbit.com/google.com" alt="Client"></div>
+            </div>
+        </div>
     </section>
 
     <!-- Contact Section -->
-    <section id="contacto" class="py-24 bg-white relative">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          <div data-aos="fade-right">
-            <h3 class="text-4xl font-bold mb-6">
-              ¿Listo para dar el
-              <span class="text-indigo-600">siguiente paso</span>?
-            </h3>
-            <p class="text-lg text-slate-600 mb-8 leading-relaxed">
-              Estamos listos para transformar los retos de su empresa en
-              soluciones tecnológicas eficientes. Déjenos un mensaje y uno de
-              nuestros expertos se pondrá en contacto pronto.
-            </p>
-            <div class="space-y-4">
-              <div class="flex items-center gap-4 text-slate-600">
-                <div
-                  class="w-12 h-12 rounded-full bg-indigo-50 flex items-center justify-center text-indigo-600"
-                >
-                  <i class="fas fa-envelope"></i>
+    <section id="contacto" class="py-32 bg-white relative overflow-hidden">
+        <div class="absolute -bottom-20 -right-20 w-96 h-96 bg-indigo-50 rounded-full blur-[100px] opacity-50"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
+                <div data-aos="fade-right">
+                    <h3 class="text-5xl font-bold mb-8 leading-tight">¿Desea <span class="text-indigo-600">optimizar</span> su infraestructura?</h3>
+                    <p class="text-xl text-slate-600 mb-12 leading-relaxed">
+                        Nuestros ingenieros certificados están listos para analizar sus necesidades y proponer una hoja de ruta tecnológica personalizada.
+                    </p>
+                    <div class="space-y-8">
+                        <div class="flex items-center gap-6 group">
+                            <div class="w-16 h-16 rounded-[22px] bg-indigo-50 flex items-center justify-center text-indigo-600 text-2xl group-hover:bg-indigo-600 group-hover:text-white transition duration-300">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <h5 class="font-bold text-slate-400 text-xs uppercase tracking-widest mb-1">Escríbanos</h5>
+                                <span class="text-xl font-semibold">ventas@smartnetgt.com</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-6 group">
+                            <div class="w-16 h-16 rounded-[22px] bg-indigo-50 flex items-center justify-center text-indigo-600 text-2xl group-hover:bg-indigo-600 group-hover:text-white transition duration-300">
+                                <i class="fas fa-location-dot"></i>
+                            </div>
+                            <div>
+                                <h5 class="font-bold text-slate-400 text-xs uppercase tracking-widest mb-1">Ubicación</h5>
+                                <span class="text-xl font-semibold">Ciudad de Guatemala, Guatemala</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <span>ventas@smartnetgt.com</span>
-              </div>
-              <div class="flex items-center gap-4 text-slate-600">
-                <div
-                  class="w-12 h-12 rounded-full bg-indigo-50 flex items-center justify-center text-indigo-600"
-                >
-                  <i class="fas fa-phone"></i>
-                </div>
-                <span>+502 2200-XXXX</span>
-              </div>
-            </div>
-          </div>
 
-          <div
-            class="bg-slate-50 p-8 md:p-12 rounded-[40px] border border-slate-100 shadow-xl"
-            data-aos="fade-left"
-          >
-            <form
-              action="mailto:ventas@smartnetgt.com"
-              method="post"
-              enctype="text/plain"
-              class="space-y-6"
-            >
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <label class="block text-sm font-semibold mb-2 ml-1"
-                    >Nombre</label
-                  >
-                  <input
-                    type="text"
-                    name="nombre"
-                    placeholder="Juan Pérez"
-                    class="w-full px-5 py-4 rounded-2xl border-none ring-2 ring-slate-200 focus:ring-indigo-600 transition outline-none"
-                    required
-                  />
+                <div class="bg-white p-10 md:p-16 rounded-[60px] border border-indigo-50 shadow-[0_50px_100px_-20px_rgba(79,70,229,0.15)]" data-aos="fade-left">
+                    <form action="#" class="space-y-8">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <div>
+                                <label class="block text-sm font-bold mb-3 ml-2 text-slate-700 underline decoration-indigo-200 decoration-4 underline-offset-4">Nombre Completo</label>
+                                <input type="text" placeholder="Ej. Juan Pérez" class="w-full px-7 py-5 rounded-[22px] bg-slate-50 border-none focus:ring-2 focus:ring-indigo-600 transition outline-none text-lg" required>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-bold mb-3 ml-2 text-slate-700 underline decoration-indigo-200 decoration-4 underline-offset-4">Correo Corporativo</label>
+                                <input type="email" placeholder="Ej. j.perez@empresa.com" class="w-full px-7 py-5 rounded-[22px] bg-slate-50 border-none focus:ring-2 focus:ring-indigo-600 transition outline-none text-lg" required>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold mb-3 ml-2 text-slate-700 underline decoration-indigo-200 decoration-4 underline-offset-4">Asunto del Proyecto</label>
+                            <input type="text" placeholder="Ej. Auditoría de Ciberseguridad" class="w-full px-7 py-5 rounded-[22px] bg-slate-50 border-none focus:ring-2 focus:ring-indigo-600 transition outline-none text-lg" required>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold mb-3 ml-2 text-slate-700 underline decoration-indigo-200 decoration-4 underline-offset-4">Mensaje</label>
+                            <textarea rows="4" placeholder="Cuéntenos sobre sus desafíos tecnológicos..." class="w-full px-7 py-5 rounded-[22px] bg-slate-50 border-none focus:ring-2 focus:ring-indigo-600 transition outline-none text-lg" required></textarea>
+                        </div>
+                        <button type="submit" class="w-full py-6 bg-indigo-600 text-white font-bold rounded-[22px] hover:bg-indigo-700 transition transform hover:-translate-y-2 shadow-2xl shadow-indigo-200 text-xl tracking-wide">
+                            Iniciar Conversación <i class="fas fa-paper-plane ml-3 text-sm opacity-50"></i>
+                        </button>
+                    </form>
                 </div>
-                <div>
-                  <label class="block text-sm font-semibold mb-2 ml-1"
-                    >Correo Electrónico</label
-                  >
-                  <input
-                    type="email"
-                    name="email"
-                    placeholder="juan@empresa.com"
-                    class="w-full px-5 py-4 rounded-2xl border-none ring-2 ring-slate-200 focus:ring-indigo-600 transition outline-none"
-                    required
-                  />
-                </div>
-              </div>
-              <div>
-                <label class="block text-sm font-semibold mb-2 ml-1"
-                  >Mensaje</label
-                >
-                <textarea
-                  name="mensaje"
-                  rows="4"
-                  placeholder="¿Cómo podemos ayudarle?"
-                  class="w-full px-5 py-4 rounded-2xl border-none ring-2 ring-slate-200 focus:ring-indigo-600 transition outline-none"
-                  required
-                ></textarea>
-              </div>
-              <button
-                type="submit"
-                class="w-full py-4 bg-indigo-600 text-white font-bold rounded-2xl hover:bg-indigo-700 transition transform hover:-translate-y-1 shadow-lg shadow-indigo-100"
-              >
-                Enviar Mensaje
-              </button>
-            </form>
-          </div>
+            </div>
         </div>
-      </div>
     </section>
 
     <!-- Footer -->
-    <footer class="py-12 bg-slate-900 text-white">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div
-          class="flex flex-col md:flex-row justify-between items-center gap-8"
-        >
-          <div class="flex items-center gap-3">
-            <img
-              src="assets/logo.png"
-              alt="SmartNet Logo"
-              class="h-8 brightness-0 invert"
-            />
-            <span class="text-xl font-bold">SmartNet</span>
-          </div>
-          <p class="text-slate-400 text-sm">
-            &copy; 2024 SmartNet Guatemala. Todos los derechos reservados.
-          </p>
-          <div class="flex gap-6">
-            <a
-              href="#"
-              class="text-slate-400 hover:text-white transition text-xl"
-              ><i class="fab fa-linkedin"></i
-            ></a>
-            <a
-              href="#"
-              class="text-slate-400 hover:text-white transition text-xl"
-              ><i class="fab fa-facebook"></i
-            ></a>
-            <a
-              href="#"
-              class="text-slate-400 hover:text-white transition text-xl"
-              ><i class="fab fa-instagram"></i
-            ></a>
-          </div>
+    <footer class="py-20 bg-slate-900 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-16 items-center border-b border-white/5 pb-16 mb-16">
+                <div class="flex items-center gap-4">
+                    <img src="assets/logo.png" alt="SmartNet Logo" class="h-10 brightness-0 invert">
+                    <span class="text-2xl font-bold tracking-tighter">SmartNet<span class="text-indigo-400">.</span></span>
+                </div>
+                <div class="flex justify-center gap-12 font-medium text-slate-400">
+                    <a href="#" class="hover:text-white transition">LinkedIn</a>
+                    <a href="#" class="hover:text-white transition">Instagram</a>
+                    <a href="#" class="hover:text-white transition">X (Twitter)</a>
+                </div>
+                <div class="md:text-right">
+                    <p class="text-slate-500 text-sm">Design & Security Standards</p>
+                    <p class="font-bold">Guatemala City, GT</p>
+                </div>
+            </div>
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6 text-slate-500 text-sm">
+                <p>&copy; 2024 SmartNet Guatemala. Todos los derechos reservados.</p>
+                <div class="flex gap-8">
+                    <a href="#" class="hover:text-slate-300 transition">Política de Privacidad</a>
+                    <a href="#" class="hover:text-slate-300 transition">Términos de Servicio</a>
+                </div>
+            </div>
         </div>
-      </div>
     </footer>
 
     <!-- AOS.js -->
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    
     <script>
-      // Init AOS
-      AOS.init({
-        duration: 1000,
-        easing: "ease-out-cubic",
-        once: true,
-        offset: 120,
-      });
+        // Init AOS
+        AOS.init({
+            duration: 1200,
+            easing: 'ease-out-cubic',
+            once: true,
+            offset: 120
+        });
 
-      // Scroll Progress Bar
-      window.addEventListener("scroll", () => {
-        const h = document.documentElement;
-        const b = document.body;
-        const st = "scrollTop";
-        const sh = "scrollHeight";
-        const percent =
-          ((h[st] || b[st]) / ((h[sh] || b[sh]) - h.clientHeight)) * 100;
-        document.getElementById("progress-bar").style.width = percent + "%";
-      });
+        // Init Swiper
+        const swiper = new Swiper('.hero-swiper', {
+            loop: true,
+            speed: 1000,
+            autoplay: {
+                delay: 6000,
+                disableOnInteraction: false,
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            effect: 'fade',
+            fadeEffect: {
+                crossFade: true
+            },
+        });
 
-      // Smooth Appearance for Hero
-      window.addEventListener("load", () => {
-        document.querySelector(".hero-animate").style.opacity = "1";
-      });
+        // Scroll Progress Bar
+        window.addEventListener('scroll', () => {
+            const h = document.documentElement;
+            const b = document.body;
+            const st = 'scrollTop';
+            const sh = 'scrollHeight';
+            const percent = (h[st] || b[st]) / ((h[sh] || b[sh]) - h.clientHeight) * 100;
+            document.getElementById('progress-bar').style.width = percent + '%';
+        });
     </script>
-  </body>
+</body>
 </html>
