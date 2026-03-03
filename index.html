@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
-    <title>SmartNet | Gestión Integral de Seguridad & NOC</title>
+    <title>SmartNet | Tecnologías Innovadoras</title>
     
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="assets/logo.png" />
@@ -16,10 +16,10 @@
 
     <!-- Icons -->
     <link rel="stylesheet" href="assets_vuexy/vendor/fonts/tabler-icons.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" rel="stylesheet">
 
-    <!-- Core CSS -->
-    <link rel="stylesheet" href="assets_vuexy/vendor/css/core.css" class="template-customizer-core-css" />
+    <!-- Core CSS (Vuexy) -->
+    <link rel="stylesheet" href="assets_vuexy/vendor/css/core.css" />
     <link rel="stylesheet" href="assets_vuexy/css/demo.css" />
     <link rel="stylesheet" href="assets_vuexy/vendor/css/pages/front-page.css" />
 
@@ -31,22 +31,27 @@
     <!-- Page CSS -->
     <link rel="stylesheet" href="assets_vuexy/vendor/css/pages/front-page-landing.css" />
 
-    <!-- Helpers -->
-    <script src="assets_vuexy/vendor/js/helpers.js"></script>
-    <script src="assets_vuexy/js/front-config.js"></script>
-
     <style>
-        body { font-family: 'Outfit', 'Public Sans', sans-serif !important; }
-        .hero-swiper { width: 100%; height: 85vh; min-height: 600px; }
-        .swiper-slide { display: flex; align-items: center; background: #fff; }
-        .gradient-text { background: linear-gradient(135deg, #7367f0 0%, #ce93d8 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        :root {
+            --primary-gradient: linear-gradient(135deg, #7367f0 0%, #ce93d8 100%);
+            --secondary-gradient: linear-gradient(135deg, #28c76f 0%, #81fbb8 100%);
+        }
+        body { font-family: 'Outfit', 'Public Sans', sans-serif !important; background-color: #fff; }
+        .hero-section { background: #fff; padding: 100px 0; overflow: hidden; }
+        .gradient-text { background: var(--primary-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .service-card { transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); border-radius: 2.5rem !important; border: 1px solid rgba(115, 103, 240, 0.08) !important; background: #fff; }
+        .service-card:hover { transform: translateY(-15px) scale(1.02); box-shadow: 0 20px 40px rgba(115, 103, 240, 0.12) !important; }
+        .img-isometric { max-width: 100%; height: auto; transition: transform 0.5s ease; }
         .floating { animation: float 6s ease-in-out infinite; }
-        @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-20px); } }
-        .service-card { transition: all 0.3s ease; border-radius: 2rem !important; border: 1px solid #eee !important; }
-        .service-card:hover { transform: translateY(-10px); box-shadow: 0 1rem 3rem rgba(115, 103, 240, 0.15) !important; }
-        .navbar { backdrop-filter: blur(10px); background: rgba(255, 255, 255, 0.8) !important; height: 80px; }
-        #progress-bar { position: fixed; top: 0; left: 0; height: 4px; background: #7367f0; width: 0%; z-index: 9999; transition: width 0.1s ease; }
-        .hero-img-container img { max-width: 100%; height: auto; border-radius: 2rem; }
+        @keyframes float { 0%, 100% { transform: translateY(0px) rotate(0deg); } 50% { transform: translateY(-20px) rotate(1deg); } }
+        .navbar { backdrop-filter: blur(15px); background: rgba(255, 255, 255, 0.8) !important; height: 90px; border-bottom: 1px solid rgba(0,0,0,0.05); }
+        .btn-primary { background: var(--primary-gradient) !important; border: none !important; border-radius: 50px !important; padding: 12px 30px !important; }
+        .btn-outline-primary { border: 2px solid #7367f0 !important; color: #7367f0 !important; border-radius: 50px !important; padding: 12px 30px !important; font-weight: 600; }
+        #progress-bar { position: fixed; top: 0; left: 0; height: 5px; background: var(--primary-gradient); width: 0%; z-index: 9999; }
+        .section-title { font-weight: 800; letter-spacing: -1px; }
+        .client-logo { filter: grayscale(1); opacity: 0.6; transition: all 0.3s ease; max-height: 40px; }
+        .client-logo:hover { filter: grayscale(0); opacity: 1; transform: scale(1.1); }
+        .bg-light-blue { background-color: #f8faff; }
     </style>
 </head>
 
@@ -59,124 +64,214 @@
             <div class="navbar navbar-expand-lg landing-navbar px-3 px-md-4">
                 <div class="navbar-brand app-brand demo d-flex py-0 me-4 ms-0">
                     <a href="index.html" class="app-brand-link">
-                        <span class="app-brand-logo demo">
-                            <img src="assets/logo.png" alt="SmartNet" style="height: 32px;">
-                        </span>
-                        <span class="app-brand-text demo menu-text fw-bold ms-2 ps-1 text-primary">SmartNet</span>
+                        <img src="assets/logo.png" alt="SmartNet" style="height: 45px;" class="animate__animated animate__fadeInLeft">
+                        <span class="app-brand-text demo menu-text fw-bold ms-2 text-primary" style="font-size: 1.8rem; letter-spacing: -1px;">SmartNet</span>
                     </a>
                 </div>
                 <div class="collapse navbar-collapse landing-nav-menu" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto">
-                        <li class="nav-item"><a class="nav-link fw-medium" href="#inicio">Inicio</a></li>
-                        <li class="nav-item"><a class="nav-link fw-medium" href="#sistema">Nuestro Sistema</a></li>
-                        <li class="nav-item"><a class="nav-link fw-medium" href="#noc">NOC</a></li>
-                        <li class="nav-item"><a class="nav-link fw-medium" href="#servicios">Servicios</a></li>
+                        <li class="nav-item"><a class="nav-link fw-bold" href="#inicio">Inicio</a></li>
+                        <li class="nav-item"><a class="nav-link fw-bold" href="#servicios">Servicios</a></li>
+                        <li class="nav-item"><a class="nav-link fw-bold" href="#gestion">Gestión de Seguridad</a></li>
+                        <li class="nav-item"><a class="nav-link fw-bold" href="#casos">Casos de Éxito</a></li>
                     </ul>
                 </div>
                 <div class="ms-auto">
-                    <a href="#contacto" class="btn btn-primary">Contáctanos</a>
+                    <a href="#contacto" class="btn btn-primary d-none d-md-inline-block">Contáctanos</a>
                 </div>
             </div>
         </div>
     </nav>
 
-    <!-- Content -->
-    <div data-bs-spy="scroll" class="scrollspy-example">
-        
-        <!-- Hero Slider -->
-        <section id="inicio" class="section-py landing-hero">
-            <div class="swiper hero-swiper">
-                <div class="swiper-wrapper">
-                    <!-- Slide 1 -->
-                    <div class="swiper-slide">
-                        <div class="container-xxl">
-                            <div class="row align-items-center">
-                                <div class="col-lg-6">
-                                    <h1 class="display-4 fw-bold mb-4">Gestión de Seguridad <br><span class="gradient-text">Integral & FEL</span></h1>
-                                    <p class="lead mb-5">Centralice CCTV, Biometría, Control de Armas y Facturación FEL en una única plataforma inteligente.</p>
-                                    <div class="d-flex gap-3">
-                                        <a href="#sistema" class="btn btn-primary btn-lg">Ver Demo</a>
-                                        <a href="#contacto" class="btn btn-outline-primary btn-lg">Saber Más</a>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 hero-img-container">
-                                    <img src="assets/hero-sistema.png" alt="Sistema" class="floating shadow-lg">
-                                </div>
-                            </div>
+    <!-- Hero Section -->
+    <section id="inicio" class="hero-section">
+        <div class="container-xxl">
+            <div class="row align-items-center g-5">
+                <div class="col-lg-6 text-center text-lg-start">
+                    <div class="animate__animated animate__fadeInDown">
+                        <span class="badge bg-label-primary px-3 py-2 mb-3 fw-bold rounded-pill">TECNOLOGÍAS QUE IMPULSAN</span>
+                        <h1 class="display-3 fw-extrabold mb-4">Conecta, Protege y <br><span class="gradient-text">Transforma</span> tu Empresa</h1>
+                        <p class="lead mb-5 text-muted fw-medium" style="font-size: 1.25rem;">Soluciones tecnológicas innovadoras creadas para liderar el mercado en Guatemala y toda la región.</p>
+                        <div class="d-flex flex-wrap justify-content-center justify-content-lg-start gap-3">
+                            <a href="#servicios" class="btn btn-primary btn-lg px-5">Nuestros Servicios</a>
+                            <a href="#contacto" class="btn btn-outline-primary btn-lg px-5">Hablar con Experto</a>
                         </div>
                     </div>
                 </div>
-                <div class="swiper-pagination"></div>
-            </div>
-        </section>
-
-        <!-- Features -->
-        <section id="sistema" class="section-py bg-body">
-            <div class="container-xxl">
-                <div class="text-center mb-5">
-                    <h2 class="h1 fw-bold">SmartNet Security Management</h2>
-                </div>
-                <div class="row g-4">
-                    <div class="col-md-4" data-aos="fade-up">
-                        <div class="card service-card p-4 h-100 shadow-none">
-                            <i class="ti ti-fingerprint text-primary mb-3 fs-1"></i>
-                            <h4 class="fw-bold">Biometría</h4>
-                            <p>Asistencia y acceso con reconocimiento facial facial desde móviles.</p>
-                        </div>
-                    </div>
-                    <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
-                        <div class="card service-card p-4 h-100 shadow-none">
-                            <i class="ti ti-file-invoice text-success mb-3 fs-1"></i>
-                            <h4 class="fw-bold">Facturación FEL</h4>
-                            <p>Integración nativa con SAT Guatemala para facturación automática.</p>
-                        </div>
-                    </div>
-                    <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
-                        <div class="card service-card p-4 h-100 shadow-none">
-                            <i class="ti ti-shield-lock text-info mb-3 fs-1"></i>
-                            <h4 class="fw-bold">Control de Armas</h4>
-                            <p>Gestión de DIGECAM e inventario táctico en tiempo real.</p>
-                        </div>
+                <div class="col-lg-6">
+                    <div class="animate__animated animate__zoomIn">
+                        <img src="assets/software.png" alt="SmartNet Hero" class="img-fluid floating">
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- NOC -->
-        <section id="noc" class="section-py bg-dark text-white">
-            <div class="container-xxl">
-                <div class="row align-items-center">
-                    <div class="col-lg-6" data-aos="fade-right">
-                        <h2 class="display-5 fw-bold text-white mb-4">NOC SmartNet</h2>
-                        <ul class="list-unstyled">
-                            <li class="mb-3"><i class="ti ti-check text-info me-2"></i> CCTV Alta Definición</li>
-                            <li class="mb-3"><i class="ti ti-check text-info me-2"></i> Tracking GPS Satelital</li>
-                            <li class="mb-3"><i class="ti ti-check text-info me-2"></i> Telemetría de Drones</li>
-                        </ul>
+    <!-- Services Grid -->
+    <section id="servicios" class="py-10 bg-light-blue">
+        <div class="container-xxl py-5">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <h2 class="display-5 fw-bold section-title mb-3">Nuestros Servicios</h2>
+                <div class="mx-auto bg-primary rounded-pill mb-4" style="width: 80px; height: 5px;"></div>
+                <p class="text-muted lead">Excelencia tecnológica en cada capa de su infraestructura.</p>
+            </div>
+            
+            <div class="row g-5">
+                <!-- Software -->
+                <div class="col-lg-4 col-md-6" data-aos="fade-up">
+                    <div class="card service-card h-100 p-4 text-center shadow-none">
+                        <div class="p-3 mb-4 rounded-4 bg-label-primary d-inline-block mx-auto">
+                            <img src="assets/software.png" class="img-isometric" style="height: 180px;">
+                        </div>
+                        <h3 class="fw-bold mb-3">Desarrollo de Software</h3>
+                        <p class="text-muted">Diseño y desarrollo de software a medida, optimizando sus procesos internos.</p>
                     </div>
-                    <div class="col-lg-6" data-aos="fade-left">
-                        <img src="assets/noc.png" class="img-fluid rounded-5 shadow-lg">
+                </div>
+                <!-- Seguridad Electrónica -->
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="card service-card h-100 p-4 text-center shadow-none">
+                        <div class="p-3 mb-4 rounded-4 bg-label-success d-inline-block mx-auto">
+                            <img src="assets/seguridad.png" class="img-isometric" style="height: 180px;">
+                        </div>
+                        <h3 class="fw-bold mb-3">Seguridad Electrónica</h3>
+                        <p class="text-muted">Sistemas avanzados de CCTV y control perimetral asistido por IA.</p>
+                    </div>
+                </div>
+                <!-- Ciberseguridad -->
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="card service-card h-100 p-4 text-center shadow-none">
+                        <div class="p-3 mb-4 rounded-4 bg-label-danger d-inline-block mx-auto">
+                            <img src="assets/ciberseguridad.png" class="img-isometric" style="height: 180px;">
+                        </div>
+                        <h3 class="fw-bold mb-3">Ciberseguridad</h3>
+                        <p class="text-muted">Protección de datos críticos y auditorías IT de alto nivel.</p>
+                    </div>
+                </div>
+                <!-- Infraestructura -->
+                <div class="col-lg-4 col-md-6" data-aos="fade-up">
+                    <div class="card service-card h-100 p-4 text-center shadow-none">
+                        <div class="p-3 mb-4 rounded-4 bg-label-info d-inline-block mx-auto">
+                            <img src="assets/redes.png" class="img-isometric" style="height: 180px;">
+                        </div>
+                        <h3 class="fw-bold mb-3">Infraestructura de Redes</h3>
+                        <p class="text-muted">Conectividad de alta velocidad y robustez para su empresa.</p>
+                    </div>
+                </div>
+                <!-- Nube -->
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="card service-card h-100 p-4 text-center shadow-none">
+                        <div class="p-3 mb-4 rounded-4 bg-label-warning d-inline-block mx-auto">
+                            <img src="assets/nube.png" class="img-isometric" style="height: 180px;">
+                        </div>
+                        <h3 class="fw-bold mb-3">Servicios en Nube</h3>
+                        <p class="text-muted">Escalabilidad y disponibilidad total para sus aplicaciones.</p>
+                    </div>
+                </div>
+                <!-- Energía -->
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="card service-card h-100 p-4 text-center shadow-none">
+                        <div class="p-3 mb-4 rounded-4 bg-label-secondary d-inline-block mx-auto">
+                            <img src="assets/energia.png" class="img-isometric" style="height: 180px;">
+                        </div>
+                        <h3 class="fw-bold mb-3">Energía y UPS</h3>
+                        <p class="text-muted">Sistemas de respaldo energético y energía renovable certificada.</p>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-    </div>
+    <!-- New Feature: Security Management Module (Preserving previous work) -->
+    <section id="gestion" class="py-10 bg-white">
+        <div class="container-xxl">
+            <div class="row align-items-center g-5">
+                <div class="col-lg-6" data-aos="fade-right">
+                    <span class="badge bg-label-primary mb-3">PRODUCTO ESTRELLA</span>
+                    <h2 class="display-5 fw-bold mb-4">Gestión Integral de Seguridad</h2>
+                    <p class="lead mb-5 text-muted">El software de control total: CCTV, Biometría, Control de Armas y Facturación FEL.</p>
+                    <div class="row g-4">
+                        <div class="col-6">
+                            <h5 class="fw-bold"><i class="ti ti-check text-primary me-2"></i> Rondas GPS</h5>
+                            <p class="small text-muted">Seguimiento en tiempo real de operativos.</p>
+                        </div>
+                        <div class="col-6">
+                            <h5 class="fw-bold"><i class="ti ti-check text-primary me-2"></i> Pánico Móvil</h5>
+                            <p class="small text-muted">Botón de alerta con despacho inmediato.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6" data-aos="fade-left">
+                    <img src="assets/hero-sistema.png" class="img-fluid floating">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Success Cases / Partners -->
+    <section id="casos" class="py-10 bg-body">
+        <div class="container-xxl">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <h3 class="fw-bold mb-5">Optimizamos la infraestructura de red y seguridad para empresas líderes en Guatemala</h3>
+                <div class="swiper-partners overflow-hidden">
+                    <div class="swiper" id="swiper-partners">
+                        <div class="swiper-wrapper align-items-center">
+                            <div class="swiper-slide text-center"><img src="https://upload.wikimedia.org/wikipedia/commons/4/4e/Tigo_logo.png" class="client-logo img-fluid" style="width: 80px;"></div>
+                            <div class="swiper-slide text-center"><img src="https://upload.wikimedia.org/wikipedia/commons/0/05/Banco_Azteca_logo.svg" class="client-logo img-fluid" style="width: 120px;"></div>
+                            <div class="swiper-slide text-center"><img src="https://upload.wikimedia.org/wikipedia/en/thumb/e/e8/Shell_logo.svg/1200px-Shell_logo.svg.png" class="client-logo img-fluid" style="width: 60px;"></div>
+                            <div class="swiper-slide text-center"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Samsung_Logo.svg/2560px-Samsung_Logo.svg.png" class="client-logo img-fluid" style="width: 120px;"></div>
+                            <div class="swiper-slide text-center"><h4 class="fw-bold text-muted opacity-50">TELUS</h4></div>
+                            <div class="swiper-slide text-center"><h4 class="fw-bold text-muted opacity-50">KEPLER</h4></div>
+                            <div class="swiper-slide text-center"><h4 class="fw-bold text-muted opacity-50">SAITAFE</h4></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer bg-primary text-white py-5">
+        <div class="container-xxl">
+            <div class="row g-5">
+                <div class="col-lg-6">
+                    <img src="assets/logo.png" style="height: 50px; filter: brightness(0) invert(1);" class="mb-4">
+                    <p class="text-white opacity-75">Innovación tecnológica sin límites. Transformando el futuro de Guatemala.</p>
+                </div>
+                <div class="col-lg-6 text-lg-end">
+                    <h5 class="text-white mb-4">ventas@smartnetgt.com</h5>
+                    <div class="d-flex justify-content-lg-end gap-3">
+                        <i class="ti ti-brand-linkedin fs-2"></i>
+                        <i class="ti ti-brand-facebook fs-2"></i>
+                        <i class="ti ti-brand-twitter fs-2"></i>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-5 border-white opacity-25">
+            <div class="text-center">
+                <p>&copy; 2024 SmartNet | Todos los derechos reservados</p>
+            </div>
+        </div>
+    </footer>
 
     <!-- Scripts -->
     <script src="assets_vuexy/vendor/libs/jquery/jquery.js"></script>
-    <script src="assets_vuexy/vendor/libs/popper/popper.js"></script>
-    <script src="assets_vuexy/vendor/js/bootstrap.js"></script>
-    <script src="assets_vuexy/vendor/libs/node-waves/node-waves.js"></script>
     <script src="assets_vuexy/vendor/libs/swiper/swiper.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
     
     <script>
         AOS.init({ duration: 1000, once: true });
-        new Swiper('.hero-swiper', {
+        
+        new Swiper('#swiper-partners', {
+            slidesPerView: 2,
+            spaceBetween: 50,
+            autoplay: { delay: 2000 },
             loop: true,
-            pagination: { el: '.swiper-pagination', clickable: true },
+            breakpoints: {
+                640: { slidesPerView: 3 },
+                1024: { slidesPerView: 5 },
+            }
         });
+
         window.onscroll = function() {
             let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
             let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
