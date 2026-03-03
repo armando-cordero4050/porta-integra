@@ -39,8 +39,8 @@
         body { font-family: 'Outfit', 'Public Sans', sans-serif !important; background-color: #fff; }
         .hero-section { background: #fff; padding: 100px 0; overflow: hidden; }
         .gradient-text { background: var(--primary-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .service-card { transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); border-radius: 2.5rem !important; border: 1px solid rgba(115, 103, 240, 0.08) !important; background: #fff; }
-        .service-card:hover { transform: translateY(-15px) scale(1.02); box-shadow: 0 20px 40px rgba(115, 103, 240, 0.12) !important; }
+        .service-card { transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); border-radius: 2.5rem !important; border: 1px solid rgba(115, 103, 240, 0.08) !important; background: #fff; cursor: pointer; }
+        .service-card:hover { transform: translateY(-15px) scale(1.02); box-shadow: 0 20px 40px rgba(115, 103, 240, 0.12) !important; background: #fdfdff; }
         .img-isometric { max-width: 100%; height: auto; transition: transform 0.5s ease; }
         .floating { animation: float 6s ease-in-out infinite; }
         @keyframes float { 0%, 100% { transform: translateY(0px) rotate(0deg); } 50% { transform: translateY(-20px) rotate(1deg); } }
@@ -52,6 +52,15 @@
         .client-logo { filter: grayscale(1); opacity: 0.6; transition: all 0.3s ease; max-height: 40px; }
         .client-logo:hover { filter: grayscale(0); opacity: 1; transform: scale(1.1); }
         .bg-light-blue { background-color: #f8faff; }
+        
+        /* Modal Styles */
+        .modal-content { border-radius: 2rem !important; border: none !important; box-shadow: 0 2rem 5rem rgba(0,0,0,0.1) !important; }
+        .modal-header { border-bottom: none !important; padding: 2.5rem 2.5rem 1rem !important; }
+        .modal-body { padding: 1rem 2.5rem 2.5rem !important; }
+        .tech-badge { background: #f3f2ff; color: #7367f0; padding: 0.5rem 1rem; border-radius: 50px; font-weight: 600; font-size: 0.85rem; margin-right: 0.5rem; margin-bottom: 0.5rem; display: inline-block; }
+        .brand-icon { width: 40px; height: 40px; object-fit: contain; margin-right: 1rem; }
+        .experience-box { background: #f8faff; border-radius: 1.5rem; padding: 1.5rem; border-left: 5px solid #7367f0; }
+        .modal-isometric-img { border-radius: 1.5rem; background: #fff; padding: 1rem; box-shadow: 0 10px 30px rgba(0,0,0,0.05); margin-bottom: 2rem; }
     </style>
 </head>
 
@@ -113,75 +122,81 @@
             <div class="text-center mb-5" data-aos="fade-up">
                 <h2 class="display-5 fw-bold section-title mb-3">Nuestros Servicios</h2>
                 <div class="mx-auto bg-primary rounded-pill mb-4" style="width: 80px; height: 5px;"></div>
-                <p class="text-muted lead">Excelencia tecnológica en cada capa de su infraestructura.</p>
+                <p class="text-muted lead">Excelencia tecnológica en cada capa de su infraestructura. Haga clic en cada servicio para ver más.</p>
             </div>
             
             <div class="row g-5">
                 <!-- Software -->
-                <div class="col-lg-4 col-md-6" data-aos="fade-up">
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-bs-toggle="modal" data-bs-target="#modalSoftware">
                     <div class="card service-card h-100 p-4 text-center shadow-none">
                         <div class="p-3 mb-4 rounded-4 bg-label-primary d-inline-block mx-auto">
                             <img src="assets/software.png" class="img-isometric" style="height: 180px;">
                         </div>
                         <h3 class="fw-bold mb-3">Desarrollo de Software</h3>
                         <p class="text-muted">Diseño y desarrollo de software a medida, optimizando sus procesos internos.</p>
+                        <span class="text-primary fw-bold mt-auto">Ver detalles <i class="ti ti-arrow-right"></i></span>
                     </div>
                 </div>
                 <!-- Seguridad Electrónica -->
-                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100" data-bs-toggle="modal" data-bs-target="#modalSeguridad">
                     <div class="card service-card h-100 p-4 text-center shadow-none">
                         <div class="p-3 mb-4 rounded-4 bg-label-success d-inline-block mx-auto">
                             <img src="assets/seguridad.png" class="img-isometric" style="height: 180px;">
                         </div>
                         <h3 class="fw-bold mb-3">Seguridad Electrónica</h3>
                         <p class="text-muted">Sistemas avanzados de CCTV y control perimetral asistido por IA.</p>
+                        <span class="text-success fw-bold mt-auto">Ver detalles <i class="ti ti-arrow-right"></i></span>
                     </div>
                 </div>
                 <!-- Ciberseguridad -->
-                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200" data-bs-toggle="modal" data-bs-target="#modalCiber">
                     <div class="card service-card h-100 p-4 text-center shadow-none">
                         <div class="p-3 mb-4 rounded-4 bg-label-danger d-inline-block mx-auto">
                             <img src="assets/ciberseguridad.png" class="img-isometric" style="height: 180px;">
                         </div>
                         <h3 class="fw-bold mb-3">Ciberseguridad</h3>
                         <p class="text-muted">Protección de datos críticos y auditorías IT de alto nivel.</p>
+                        <span class="text-danger fw-bold mt-auto">Ver detalles <i class="ti ti-arrow-right"></i></span>
                     </div>
                 </div>
                 <!-- Infraestructura -->
-                <div class="col-lg-4 col-md-6" data-aos="fade-up">
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-bs-toggle="modal" data-bs-target="#modalRedes">
                     <div class="card service-card h-100 p-4 text-center shadow-none">
                         <div class="p-3 mb-4 rounded-4 bg-label-info d-inline-block mx-auto">
                             <img src="assets/redes.png" class="img-isometric" style="height: 180px;">
                         </div>
                         <h3 class="fw-bold mb-3">Infraestructura de Redes</h3>
                         <p class="text-muted">Conectividad de alta velocidad y robustez para su empresa.</p>
+                        <span class="text-info fw-bold mt-auto">Ver detalles <i class="ti ti-arrow-right"></i></span>
                     </div>
                 </div>
                 <!-- Nube -->
-                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100" data-bs-toggle="modal" data-bs-target="#modalNube">
                     <div class="card service-card h-100 p-4 text-center shadow-none">
                         <div class="p-3 mb-4 rounded-4 bg-label-warning d-inline-block mx-auto">
                             <img src="assets/nube.png" class="img-isometric" style="height: 180px;">
                         </div>
                         <h3 class="fw-bold mb-3">Servicios en Nube</h3>
                         <p class="text-muted">Escalabilidad y disponibilidad total para sus aplicaciones.</p>
+                        <span class="text-warning fw-bold mt-auto">Ver detalles <i class="ti ti-arrow-right"></i></span>
                     </div>
                 </div>
                 <!-- Energía -->
-                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200" data-bs-toggle="modal" data-bs-target="#modalEnergia">
                     <div class="card service-card h-100 p-4 text-center shadow-none">
                         <div class="p-3 mb-4 rounded-4 bg-label-secondary d-inline-block mx-auto">
                             <img src="assets/energia.png" class="img-isometric" style="height: 180px;">
                         </div>
                         <h3 class="fw-bold mb-3">Energía y UPS</h3>
                         <p class="text-muted">Sistemas de respaldo energético y energía renovable certificada.</p>
+                        <span class="text-secondary fw-bold mt-auto">Ver detalles <i class="ti ti-arrow-right"></i></span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- New Feature: Security Management Module (Preserving previous work) -->
+    <!-- New Feature: Security Management Module -->
     <section id="gestion" class="py-10 bg-white">
         <div class="container-xxl">
             <div class="row align-items-center g-5">
@@ -253,8 +268,245 @@
         </div>
     </footer>
 
+    <!-- MODALS SECTION -->
+    
+    <!-- Modal Software -->
+    <div class="modal fade" id="modalSoftware" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="fw-bold mb-0">Desarrollo de Software a Medida</h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="text-center">
+                        <img src="assets/software.png" class="img-fluid modal-isometric-img" style="max-height: 250px;">
+                    </div>
+                    <p class="lead text-muted mb-4">Creamos ecosistemas digitales escalables y de alto rendimiento que transforman la operatividad de su empresa.</p>
+                    
+                    <h5 class="fw-bold mt-4">Tecnologías de Vanguardia:</h5>
+                    <div class="mb-4">
+                        <span class="tech-badge">Node.js / React</span>
+                        <span class="tech-badge">Python & AI</span>
+                        <span class="tech-badge">Docker & K8s</span>
+                        <span class="tech-badge">PostgreSQL</span>
+                    </div>
+
+                    <div class="experience-box mb-4">
+                        <h6 class="fw-bold mb-2 text-primary">Nuestra Experiencia:</h6>
+                        <p class="mb-0 small text-dark">Hemos desarrollado más de 50 soluciones ERP y aplicaciones móviles para el sector financiero y retail en Guatemala, integrando facturación electrónica FEL nativa.</p>
+                    </div>
+
+                    <h6 class="fw-bold mb-3">Marcas & Partners:</h6>
+                    <div class="d-flex align-items-center opacity-75">
+                        <span class="fw-bold text-muted me-3">MICROSOFT</span>
+                        <span class="fw-bold text-muted me-3">AWS</span>
+                        <span class="fw-bold text-muted me-3">GITHUB</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Seguridad -->
+    <div class="modal fade" id="modalSeguridad" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="fw-bold mb-0">Seguridad Electrónica & IA</h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="text-center">
+                        <img src="assets/seguridad.png" class="img-fluid modal-isometric-img" style="max-height: 250px;">
+                    </div>
+                    <p class="lead text-muted mb-4">Vigilancia proactiva que utiliza analítica de video avanzada para predecir y prevenir incidentes en tiempo real.</p>
+                    
+                    <h5 class="fw-bold mt-4">Tecnologías Aplicadas:</h5>
+                    <div class="mb-4">
+                        <span class="tech-badge">Reconocimiento Facial</span>
+                        <span class="tech-badge">Cámaras Térmicas</span>
+                        <span class="tech-badge">LPR (Placas)</span>
+                        <span class="tech-badge">VMS Milestone</span>
+                    </div>
+
+                    <div class="experience-box mb-4" style="border-left-color: #28c76f;">
+                        <h6 class="fw-bold mb-2 text-success">Nuestra Experiencia:</h6>
+                        <p class="mb-0 small text-dark">Lideramos el despliegue de seguridad perimetral para condominios residenciales de lujo y parques industriales nivel 5 en la Calzada Atanasio Tzul.</p>
+                    </div>
+
+                    <h6 class="fw-bold mb-3">Marcas Aliadas:</h6>
+                    <div class="d-flex align-items-center flex-wrap gap-4 opacity-75">
+                        <span class="fw-bold text-muted">HIKVISION (GOLD)</span>
+                        <span class="fw-bold text-muted">AXIS</span>
+                        <span class="fw-bold text-muted">DAHUA</span>
+                        <span class="fw-bold text-muted">BOSCH</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Ciberseguridad -->
+    <div class="modal fade" id="modalCiber" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="fw-bold mb-0">Ciberseguridad & Auditoría IT</h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="text-center">
+                        <img src="assets/ciberseguridad.png" class="img-fluid modal-isometric-img" style="max-height: 250px;">
+                    </div>
+                    <p class="lead text-muted mb-4">Blindaje total para su activo más valioso: la información. Protegemos su red contra ransomware y ataques avanzados.</p>
+                    
+                    <h5 class="fw-bold mt-4">Estrategias de Defensa:</h5>
+                    <div class="mb-4">
+                        <span class="tech-badge">Zero Trust Architecture</span>
+                        <span class="tech-badge">Pentesting</span>
+                        <span class="tech-badge">SOC as a Service</span>
+                        <span class="tech-badge">EDR / XDR</span>
+                    </div>
+
+                    <div class="experience-box mb-4" style="border-left-color: #ea5455;">
+                        <h6 class="fw-bold mb-2 text-danger">Nuestra Experiencia:</h6>
+                        <p class="mb-0 small text-dark">Certificamos la infraestructura de seguridad de entidades financieras locales bajo normativas ISO 27001 y cumplimiento local de la SIB.</p>
+                    </div>
+
+                    <h6 class="fw-bold mb-3">Líderes de Mercado:</h6>
+                    <div class="d-flex align-items-center flex-wrap gap-4 opacity-75">
+                        <span class="fw-bold text-muted">FORTINET</span>
+                        <span class="fw-bold text-muted">CROWDSTRIKE</span>
+                        <span class="fw-bold text-muted">PALO ALTO</span>
+                        <span class="fw-bold text-muted">DARKTRACE</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Redes -->
+    <div class="modal fade" id="modalRedes" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="fw-bold mb-0">Infraestructura de Redes</h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="text-center">
+                        <img src="assets/redes.png" class="img-fluid modal-isometric-img" style="max-height: 250px;">
+                    </div>
+                    <p class="lead text-muted mb-4">Diseñamos y ejecutamos las "autopistas de datos" de su empresa, asegurando cero latencia y máxima disponibilidad.</p>
+                    
+                    <h5 class="fw-bold mt-4">Infraestructura Crítica:</h5>
+                    <div class="mb-4">
+                        <span class="tech-badge">Fibra Óptica FTTH</span>
+                        <span class="tech-badge">Wi-Fi 7 (Próx)</span>
+                        <span class="tech-badge">SD-WAN</span>
+                        <span class="tech-badge">Cabling Cat 6A/7</span>
+                    </div>
+
+                    <div class="experience-box mb-4" style="border-left-color: #00cfe8;">
+                        <h6 class="fw-bold mb-2 text-info">Nuestra Experiencia:</h6>
+                        <p class="mb-0 small text-dark">Instalación de backbone de fibra óptica y redes inalámbricas de alta densidad para hoteles y centros de convenciones en la Ciudad de Guatemala.</p>
+                    </div>
+
+                    <h6 class="fw-bold mb-3">Marcas Premium:</h6>
+                    <div class="d-flex align-items-center flex-wrap gap-4 opacity-75">
+                        <span class="fw-bold text-muted">CISCO</span>
+                        <span class="fw-bold text-muted">UBIQUITI (UNIFI)</span>
+                        <span class="fw-bold text-muted">ARUBA</span>
+                        <span class="fw-bold text-muted">PANDUIT</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Nube -->
+    <div class="modal fade" id="modalNube" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="fw-bold mb-0">Servicios en la Nube (Cloud)</h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="text-center">
+                        <img src="assets/nube.png" class="img-fluid modal-isometric-img" style="max-height: 250px;">
+                    </div>
+                    <p class="lead text-muted mb-4">Migre sus servidores físicos a una infraestructura elástica y global que reduce costos y aumenta la eficiencia.</p>
+                    
+                    <h5 class="fw-bold mt-4">Ecosistema Cloud:</h5>
+                    <div class="mb-4">
+                        <span class="tech-badge">AWS EC2 / S3</span>
+                        <span class="tech-badge">Azure Virtual Machines</span>
+                        <span class="tech-badge">Cloud Recovery</span>
+                        <span class="tech-badge">Hybrid Cloud</span>
+                    </div>
+
+                    <div class="experience-box mb-4" style="border-left-color: #ff9f43;">
+                        <h6 class="fw-bold mb-2 text-warning">Nuestra Experiencia:</h6>
+                        <p class="mb-0 small text-dark">Migración exitosa de más de 200 TB de datos para empresas de logística nacionales a la nube de AWS con 99.9% de uptime garantizado.</p>
+                    </div>
+
+                    <h6 class="fw-bold mb-3">Partners Globales:</h6>
+                    <div class="d-flex align-items-center flex-wrap gap-4 opacity-75">
+                        <span class="fw-bold text-muted">AMAZON AWS</span>
+                        <span class="fw-bold text-muted">MICROSOFT AZURE</span>
+                        <span class="fw-bold text-muted">GOOGLE CLOUD</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Energía -->
+    <div class="modal fade" id="modalEnergia" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="fw-bold mb-0">Energía Renovable & UPS</h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="text-center">
+                        <img src="assets/energia.png" class="img-fluid modal-isometric-img" style="max-height: 250px;">
+                    </div>
+                    <p class="lead text-muted mb-4">Sostenibilidad y respaldo ininterrumpido. Proteja su operación contra las fluctuaciones eléctricas locales.</p>
+                    
+                    <h5 class="fw-bold mt-4">Tecnologías de Respaldo:</h5>
+                    <div class="mb-4">
+                        <span class="tech-badge">Litio LiFePO4</span>
+                        <span class="tech-badge">Solar On-Grid/Off-Grid</span>
+                        <span class="tech-badge">Online Double Conversion</span>
+                        <span class="tech-badge">Smart Inverters</span>
+                    </div>
+
+                    <div class="experience-box mb-4" style="border-left-color: #6c757d;">
+                        <h6 class="fw-bold mb-2 text-secondary">Nuestra Experiencia:</h6>
+                        <p class="mb-0 small text-dark">Diseño de sistemas de respaldo solar e ininterrumpido para laboratorios médicos y plantas de manufactura en Escuintla y Quetzaltenango.</p>
+                    </div>
+
+                    <h6 class="fw-bold mb-3">Marcas de Calidad:</h6>
+                    <div class="d-flex align-items-center flex-wrap gap-4 opacity-75">
+                        <span class="fw-bold text-muted">VICTRON ENERGY</span>
+                        <span class="fw-bold text-muted">SCHNEIDER ELECTRIC</span>
+                        <span class="fw-bold text-muted">APC</span>
+                        <span class="fw-bold text-muted">TRIPP LITE</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Scripts -->
     <script src="assets_vuexy/vendor/libs/jquery/jquery.js"></script>
+    <script src="assets_vuexy/vendor/libs/popper/popper.js"></script>
+    <script src="assets_vuexy/vendor/js/bootstrap.bundle.js"></script>
+    <script src="assets_vuexy/vendor/libs/node-waves/node-waves.js"></script>
     <script src="assets_vuexy/vendor/libs/swiper/swiper.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
     
