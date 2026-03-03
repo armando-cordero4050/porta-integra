@@ -1,598 +1,387 @@
 <!DOCTYPE html>
-<html lang="es" class="light-style layout-navbar-fixed layout-wide" dir="ltr" data-theme="theme-default" data-assets-path="assets_vuexy/" data-template="front-pages">
+<html lang="es">
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
-    <title>SENTRY | Soluciones Tecnológicas de Élite</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SENTRY | Innovación Tecnológica & Seguridad de Élite</title>
     
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="assets/logo.png" />
-
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-
-    <!-- Icons -->
-    <link rel="stylesheet" href="assets_vuexy/vendor/fonts/tabler-icons.css" />
-    <link href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" rel="stylesheet">
-
-    <!-- Core CSS -->
-    <link rel="stylesheet" href="assets_vuexy/vendor/css/core.css" />
-    <link rel="stylesheet" href="assets_vuexy/css/demo.css" />
-    <link rel="stylesheet" href="assets_vuexy/vendor/css/pages/front-page.css" />
-
-    <!-- Vendors CSS -->
-    <link rel="stylesheet" href="assets_vuexy/vendor/libs/node-waves/node-waves.css" />
-    <link rel="stylesheet" href="assets_vuexy/vendor/libs/swiper/swiper.css" />
+    <!-- Google Fonts: Syne para impacto, Inter para lectura -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Icons & Animations -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
 
     <style>
         :root {
-            --sentry-primary: #6366f1; /* Indigo vibrant */
-            --sentry-dark: #0f172a;
-            --sentry-accent: #10b981; /* Emerald */
-            --sentry-bg: #ffffff;
-            --sentry-text: #334155;
-            --sentry-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+            --primary: #4F46E5;
+            --accent: #10B981;
+            --dark: #0F172A;
+            --light-bg: #F8FAFC;
+            --white: #FFFFFF;
+            --glass: rgba(255, 255, 255, 0.7);
+            --gradient: linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%);
+            --gradient-soft: linear-gradient(135deg, #EEF2FF 0%, #F5F3FF 100%);
         }
-        
+
+        * { margin:0; padding:0; box-sizing: border-box; }
         body { 
-            font-family: 'Outfit', sans-serif !important; 
-            color: var(--sentry-text);
-            line-height: 1.6;
+            font-family: 'Inter', sans-serif; 
+            background: var(--white); 
+            color: var(--dark);
             overflow-x: hidden;
+            scroll-behavior: smooth;
         }
 
-        /* Navbar Styling */
-        .navbar {
-            height: 85px;
-            backdrop-filter: blur(10px);
-            background: rgba(255, 255, 255, 0.9) !important;
+        h1, h2, h3 { font-family: 'Syne', sans-serif; font-weight: 800; }
+
+        /* --- Navigation --- */
+        nav {
+            position: fixed; top: 0; width: 100%; z-index: 1000;
+            padding: 20px 0; transition: all 0.4s ease;
+            backdrop-filter: blur(10px); background: rgba(255,255,255,0.8);
             border-bottom: 1px solid rgba(0,0,0,0.05);
-            transition: all 0.3s ease;
         }
-        .navbar-brand .brand-name {
-            font-size: 1.8rem;
-            font-weight: 800;
-            letter-spacing: -1px;
-            color: var(--sentry-dark);
+        .container { max-width: 1400px; margin: 0 auto; padding: 0 40px; display: flex; align-items: center; justify-content: space-between; }
+        .logo { display:flex; align-items:center; gap:12px; font-size: 28px; font-weight: 800; text-decoration:none; color:var(--dark); }
+        .nav-links { display:flex; gap:40px; }
+        .nav-links a { text-decoration:none; color:var(--dark); font-weight:600; font-size:15px; position:relative; }
+        .nav-links a::after { content:''; position:absolute; bottom:-5px; left:0; width:0; height:2px; background:var(--primary); transition:0.3s; }
+        .nav-links a:hover::after { width:100% }
+
+        .btn-whatsapp { 
+            background: #25D366; color:white; padding:12px 28px; border-radius:100px; 
+            text-decoration:none; font-weight:700; display:flex; align-items:center; gap:8px;
+            box-shadow: 0 10px 20px rgba(37, 211, 102, 0.2); transition:0.3s;
+        }
+        .btn-whatsapp:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(37, 211, 102, 0.3); }
+
+        /* --- Hero Section --- */
+        .hero {
+            min-height: 100vh; display:flex; align-items:center; justify-content:center;
+            text-align:center; padding-top:100px; position:relative; overflow:hidden;
+            background: var(--gradient-soft);
+        }
+        .hero::before {
+            content:''; position:absolute; top: -100px; right: -100px; width: 500px; height: 500px;
+            background: radial-gradient(circle, rgba(79, 70, 229, 0.1) 0%, transparent 70%);
+        }
+        .hero-content { position:relative; z-index: 10; max-width: 1000px; }
+        .badge { 
+            background: white; border: 1px solid rgba(79, 70, 229, 0.2); color: var(--primary);
+            padding: 8px 24px; border-radius: 100px; font-weight: 700; display: inline-block; margin-bottom: 24px;
+            text-transform: uppercase; letter-spacing: 2px; font-size: 13px;
+        }
+        .hero h1 { font-size: clamp(3rem, 8vw, 6rem); line-height: 0.95; color: var(--dark); margin-bottom: 30px; letter-spacing: -3px; }
+        .text-glow { background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero p { font-size: 22px; color: #64748B; margin-bottom: 40px; font-weight: 400; max-width: 700px; margin-left:auto; margin-right:auto; }
+
+        /* --- Bento Services Grid --- */
+        .section { padding: 150px 0; }
+        .section-header { text-align:center; margin-bottom: 80px; }
+        .section-header h2 { font-size: 50px; margin-bottom: 20px; letter-spacing: -2px; }
+
+        .bento-grid {
+            display: grid; grid-template-columns: repeat(12, 1fr); gap: 30px;
+        }
+        .bento-item {
+            background: white; border: 1px solid rgba(0,0,0,0.05); border-radius: 40px; padding: 50px;
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1); min-height: 450px;
+            display:flex; flex-direction:column; position:relative; overflow:hidden;
+        }
+        .bento-item:hover { transform: translateY(-10px); box-shadow: 0 40px 80px rgba(0,0,0,0.06); }
+        .bento-icon { font-size: 60px; color: var(--primary); margin-bottom: 30px; }
+
+        /* Custom Bento Sizing */
+        .col-8 { grid-column: span 8; }
+        .col-4 { grid-column: span 4; }
+        .col-6 { grid-column: span 6; }
+        .col-12 { grid-column: span 12; }
+
+        @media (max-width: 1024px) {
+            .col-8, .col-4, .col-6 { grid-column: span 12; }
         }
 
-        /* Hero Section */
-        .hero-section {
-            padding: 160px 0 100px;
-            background: radial-gradient(circle at top right, rgba(99, 102, 241, 0.05), transparent),
-                        radial-gradient(circle at bottom left, rgba(168, 85, 247, 0.05), transparent);
-        }
-        .hero-title {
-            font-size: 4rem;
-            font-weight: 800;
-            line-height: 1.1;
-            letter-spacing: -2px;
-            color: var(--sentry-dark);
-            margin-bottom: 1.5rem;
-        }
-        .text-gradient {
-            background: var(--sentry-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+        .service-info { flex-grow: 1; }
+        .service-info h3 { font-size: 32px; margin-bottom: 20px; }
+        .service-info p { color: #64748B; line-height: 1.6; margin-bottom: 30px; font-size: 18px; }
+        .tag-row { display:flex; flex-wrap:wrap; gap:10px; }
+        .tag { background: #F1F5F9; color: #475569; padding: 6px 16px; border-radius: 100px; font-size: 13px; font-weight: 600; }
 
-        /* Service Cards - Premium Isometric Look */
-        .services-section { padding: 100px 0; background: #fbfcfe; }
-        .service-card {
-            background: #fff;
-            border-radius: 2.5rem;
-            padding: 3rem 2rem;
-            text-align: center;
-            border: 1px solid rgba(0,0,0,0.03);
-            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-            cursor: pointer;
-            height: 100%;
-            position: relative;
-            overflow: hidden;
-        }
-        .service-card::after {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: var(--sentry-gradient);
-            opacity: 0;
-            transition: opacity 0.4s ease;
-            z-index: 0;
-        }
-        .service-card:hover {
-            transform: translateY(-20px) scale(1.02);
-            box-shadow: 0 40px 80px rgba(99, 102, 241, 0.12);
-        }
-        .service-card:hover .service-content { color: #fff; position: relative; z-index: 1; }
-        .service-card:hover .text-muted { color: rgba(255,255,255,0.8) !important; }
-        .service-card:hover::after { opacity: 1; }
-        
-        .icon-box {
-            width: 180px;
-            height: 180px;
-            margin: 0 auto 2rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #f8fafc;
-            border-radius: 2rem;
-            transition: all 0.4s ease;
-        }
-        .service-card:hover .icon-box { background: rgba(255,255,255,0.2); }
-        .service-card img { width: 140px; height: 140px; object-fit: contain; }
+        /* --- SENTRY System Showcase --- */
+        .feature-showcase { background: var(--dark); color: white; border-radius: 60px; margin: 0 40px; padding: 100px; position:relative; overflow:hidden; }
+        .feature-showcase .grid-2 { display:grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items:center; }
+        .feature-showcase h2 { font-size: 60px; color: white; margin-bottom: 30px; }
+        .img-stack { position:relative; width:100%; height:500px; }
+        .img-stack img { position:absolute; width:100%; height:100%; object-fit:cover; border-radius:30px; box-shadow: 0 50px 100px rgba(0,0,0,0.5); }
+        .img-floating { animation: float 6s ease-in-out infinite; }
 
-        /* Buttons */
-        .btn-expert {
-            background: #25d366;
-            color: #fff !important;
-            border-radius: 50px;
-            padding: 14px 32px;
-            font-weight: 700;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            transition: all 0.3s ease;
-            border: none;
-            box-shadow: 0 10px 20px rgba(37, 211, 102, 0.2);
-        }
-        .btn-expert:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 30px rgba(37, 211, 102, 0.3);
-            filter: brightness(1.1);
-        }
+        /* --- Client Logos --- */
+        .client-section { padding: 100px 0; border-top: 1px solid rgba(0,0,0,0.05); }
+        .client-marquee { display:flex; gap:100px; align-items:center; overflow:hidden; }
+        .client-marquee img { height: 40px; opacity: 0.4; filter: grayscale(1); transition:0.3s; }
+        .client-marquee img:hover { opacity: 1; filter: grayscale(0); }
 
-        /* Modal Enhancements */
-        .modal-content {
-            border-radius: 3rem !important;
-            border: none !important;
-            overflow: hidden;
+        /* --- Call to Action --- */
+        .cta { text-align:center; padding: 150px 0; }
+        .cta h2 { font-size: 80px; margin-bottom: 40px; letter-spacing: -4px; }
+        .btn-large { 
+            padding: 24px 60px; font-size: 24px; font-weight:900; background: var(--dark); color:white;
+            text-decoration:none; border-radius:100px; transition:0.3s; display:inline-block;
         }
-        .modal-header-gradient {
-            background: var(--sentry-gradient);
-            padding: 4rem 3rem 2rem;
-            color: #fff;
-        }
-        .modal-body { padding: 3rem; }
-        .feature-list li {
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-            font-size: 1.1rem;
-        }
-        .feature-list i { color: var(--sentry-primary); font-size: 1.4rem; list-style: none;}
+        .btn-large:hover { transform: scale(1.05); background: var(--primary); }
 
-        /* Client Section */
-        .client-logo {
-            filter: grayscale(1);
-            opacity: 0.5;
-            transition: all 0.3s ease;
-            max-height: 50px;
-        }
-        .client-logo:hover { filter: grayscale(0); opacity: 1; transform: scale(1.1); }
+        /* --- Footer --- */
+        footer { padding: 80px 40px 40px; border-top: 1px solid rgba(0,0,0,0.05); background: #F8FAFC; }
+        .footer-grid { display:grid; grid-template-columns: repeat(4, 1fr); gap:40px; }
+        .footer-brand h4 { font-size: 24px; margin-bottom: 20px; }
+        .footer-brand p { color: #64748B; font-size: 15px; }
 
-        #progress-bar {
-            position: fixed; top: 0; left: 0; height: 6px;
-            background: var(--sentry-gradient);
-            width: 0%; z-index: 9999;
-        }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
 
-        .floating { animation: float 5s ease-in-out infinite; }
-        @keyframes float { 0% { transform: translateY(0); } 50% { transform: translateY(-15px); } 100% { transform: translateY(0); } }
+        /* Scroll Progress Bar */
+        #progress-bar { position:fixed; top:0; left:0; height:8px; background:var(--primary); transition:0.1s; z-index: 1001; }
 
     </style>
 </head>
-
 <body>
+
     <div id="progress-bar"></div>
 
-    <!-- Navbar -->
-    <nav class="layout-navbar navbar navbar-expand-lg">
+    <!-- Navigation -->
+    <nav id="navbar">
         <div class="container">
-            <a href="index.html" class="navbar-brand d-flex align-items-center">
-                <img src="assets/logo.png" alt="SENTRY" height="50" class="me-2">
-                <span class="brand-name">SENTRY</span>
+            <a href="#" class="logo">
+                <img src="assets/logo.png" height="40">
+                <span>SENTRY</span>
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navMain">
-                <ul class="navbar-nav mx-auto">
-                    <li class="nav-item"><a class="nav-link fw-bold" href="#inicio">Inicio</a></li>
-                    <li class="nav-item"><a class="nav-link fw-bold" href="#servicios">Servicios</a></li>
-                    <li class="nav-item"><a class="nav-link fw-bold" href="#clientes">Clientes</a></li>
-                </ul>
-                <div class="d-flex">
-                    <a href="https://wa.me/50252025252" target="_blank" class="btn-expert">
-                        <i class="ti ti-brand-whatsapp fs-3"></i> Hablar con un Experto
-                    </a>
-                </div>
+            <div class="nav-links">
+                <a href="#servicios">Soluciones</a>
+                <a href="#sentry">Plataforma</a>
+                <a href="#clientes">Clientes</a>
             </div>
+            <a href="https://wa.me/50252025252" target="_blank" class="btn-whatsapp">
+                <i class="ti ti-brand-whatsapp"></i> Hablar con un Experto
+            </a>
         </div>
     </nav>
 
     <!-- Hero -->
-    <section id="inicio" class="hero-section">
-        <div class="container text-center">
-            <div data-aos="zoom-out" data-aos-duration="1200">
-                <span class="badge bg-label-primary rounded-pill px-4 py-2 mb-4 fw-bold animate__animated animate__fadeIn">SENTINEL OF TECHNOLOGY</span>
-                <h1 class="hero-title animate__animated animate__fadeInUp">
-                    Protegiendo su Futuro con <br><span class="text-gradient">Innovación Absoluta</span>
-                </h1>
-                <p class="lead mx-auto mb-5 text-muted fw-medium" style="max-width: 800px; font-size: 1.3rem;">
-                    En SENTRY fusionamos servicios de vanguardia en seguridad, infraestructura y software para impulsar la conectividad inteligente y segura de su negocio.
-                </p>
-                <div class="d-flex justify-content-center gap-4 animate__animated animate__fadeInUp animate__delay-1s">
-                    <a href="#servicios" class="btn btn-primary btn-xl rounded-pill px-5 py-3 fs-5 fw-bold">Nuestros Servicios</a>
-                    <a href="https://wa.me/50252025252" target="_blank" class="btn btn-expert fs-5">Chat Directo</a>
+    <section class="hero" id="inicio">
+        <div class="hero-content" data-aos="fade-up">
+            <span class="badge">SENTINEL OF TECHNOLOGY</span>
+            <h1>Impulse su Negocio con <br><span class="text-glow">Tecnología de Impacto</span></h1>
+            <p>Integradores especialistas en seguridad elité, infraestructura de misión crítica y desarrollo de software de vanguardia.</p>
+            <div class="d-flex justify-content-center">
+                <a href="#servicios" class="btn-large">Explorar Ecosistema</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Client Marquee -->
+    <div class="client-section" id="clientes">
+        <div class="container overflow-hidden">
+            <div class="client-marquee">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/4e/Tigo_logo.png" alt="Tigo">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/0/05/Banco_Azteca_logo.svg" alt="Azteca">
+                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/e/e8/Shell_logo.svg/1200px-Shell_logo.svg.png" alt="Shell">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Samsung_Logo.svg/2560px-Samsung_Logo.svg.png" alt="Samsung">
+                <span style="font-size: 24px; font-weight:800; opacity:0.3; color:black;">TELUS</span>
+                <span style="font-size: 24px; font-weight:800; opacity:0.3; color:black;">DISAGRO</span>
+                <span style="font-size: 24px; font-weight:800; opacity:0.3; color:black;">CONADER</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Bento Content -->
+    <section class="section" id="servicios">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2>Soluciones de Clase Mundial</h2>
+                <p style="color: #64748B; font-size: 20px;">Infraestructura inteligente integrada en un solo punto de mando.</p>
+            </div>
+
+            <div class="bento-grid">
+                <!-- 1. Ciberseguridad (Large) -->
+                <article class="bento-item col-8" data-aos="fade-up">
+                    <i class="ti ti-shield-lock bento-icon" style="color:#ef4444"></i>
+                    <div class="service-info">
+                        <h3>Ciberseguridad & Blindaje Digital</h3>
+                        <p>Protección Zero Trust de datos críticos, auditorías IT avanzadas y defensa proactiva contra ransomware. Implementamos Firewalls y VPNs de alta seguridad para mitigar ataques externos.</p>
+                        <div class="tag-row">
+                            <span class="tag">Zero Trust</span>
+                            <span class="tag">Firewalls</span>
+                            <span class="tag">VPN Corporativa</span>
+                            <span class="tag">Managed Detection</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 2. Software (Small) -->
+                <article class="bento-item col-4" data-aos="fade-up" data-aos-delay="100">
+                    <i class="ti ti-code bento-icon"></i>
+                    <div class="service-info">
+                        <h3>Software & ERP</h3>
+                        <p>Ingeniería a medida, ERPs para hoteles y clínicas, y automatización FEL masiva.</p>
+                        <div class="tag-row">
+                            <span class="tag">Web & Mobile</span>
+                            <span class="tag">Cloud Native</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 3. Redes (Small) -->
+                <article class="bento-item col-4" data-aos="fade-up">
+                    <i class="ti ti-network bento-icon" style="color:#0ea5e9"></i>
+                    <div class="service-info">
+                        <h3>Infraestructura</h3>
+                        <p>Fibras ópticas, redes Wi-Fi 6 basadas en mapas de calor y telefonía IP avanzada.</p>
+                        <div class="tag-row">
+                            <span class="tag">Backbone Fibra</span>
+                            <span class="tag">Gigabit Wi-Fi</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 4. Sentry System (Large / Wide) -->
+                <article class="bento-item col-8" data-aos="fade-up" data-aos-delay="100">
+                    <i class="ti ti-eye bento-icon" style="color:#10b981"></i>
+                    <div class="service-info">
+                        <h3>Seguridad Electrónica Inteligente</h3>
+                        <p>CCTV con video analítica por IA, reconocimiento facial, cerraduras biométricas para hoteles y sistemas de alarmas contra incendios centralizados en nuestra plataforma táctica.</p>
+                        <div class="tag-row">
+                            <span class="tag">Video IA</span>
+                            <span class="tag">Biometría</span>
+                            <span class="tag">Control Perimetral</span>
+                            <span class="tag">Drones</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 5. Cloud (Half) -->
+                <article class="bento-item col-6" data-aos="fade-up">
+                    <i class="ti ti-cloud bento-icon" style="color:#8b5cf6"></i>
+                    <div class="service-info">
+                        <h3>SENTRY Cloud & VPS</h3>
+                        <p>Backup inmutable, gestión de servidores escalables y migración segura a infraestructuras híbridas.</p>
+                        <div class="tag-row">
+                            <span class="tag">VPS NVMe</span>
+                            <span class="tag">Cloud Backup</span>
+                            <span class="tag">Hosting Pro</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 6. Energía (Half) -->
+                <article class="bento-item col-6" data-aos="fade-up" data-aos-delay="100">
+                    <i class="ti ti-bolt bento-icon" style="color:#f59e0b"></i>
+                    <div class="service-info">
+                        <h3>Energía & Respaldo</h3>
+                        <p>Sistemas solares industriales y UPS de Litio de alta densidad para continuidad operacional absoluta.</p>
+                        <div class="tag-row">
+                            <span class="tag">Litio LiFePO4</span>
+                            <span class="tag">Solar Industrial</span>
+                            <span class="tag">Data Center UPS</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- SENTRY Plataforma Showcase -->
+    <section class="section" style="padding-bottom:100px;">
+        <div class="feature-showcase" id="sentry">
+            <div class="grid-2">
+                <div data-aos="fade-right">
+                    <span class="badge" style="background:rgba(255,255,255,0.1); border:none; color:white;">Core Platform</span>
+                    <h2>SENTRY VIGILANCE</h2>
+                    <p style="color:rgba(255,255,255,0.7); font-size:20px; margin-bottom:40px;">Nuestra plataforma propietaria que centraliza CCTV, Drones, GPS, Alarmas y Gestión de Agentes en una sola interfaz táctica ultra-realista.</p>
+                    <ul style="list-style:none; display:grid; grid-template-columns: 1fr 1fr; gap:20px;">
+                        <li><i class="ti ti-check" style="color:var(--accent)"></i> Monitoreo NOC 24/7</li>
+                        <li><i class="ti ti-check" style="color:var(--accent)"></i> Patrullaje por Drones</li>
+                        <li><i class="ti ti-check" style="color:var(--accent)"></i> Gestión de Rondas</li>
+                        <li><i class="ti ti-check" style="color:var(--accent)"></i> Botón de Pánico IA</li>
+                    </ul>
+                </div>
+                <div class="img-stack" data-aos="fade-left">
+                    <img src="portafolio/Slide10.jpg" class="img-floating shadow-2xl">
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Services Grid -->
-    <section id="servicios" class="services-section">
-        <div class="container text-center">
-            <div class="mb-5" data-aos="fade-up">
-                <h2 class="display-4 fw-800 text-dark mb-3">Ecosistema de Soluciones</h2>
-                <p class="text-muted">Excelencia tecnológica aplicada a cada nicho crítico de su empresa.</p>
-            </div>
-
-            <div class="row g-5 mt-4">
-                <!-- 1. Software -->
-                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-bs-toggle="modal" data-bs-target="#modalSoftware">
-                    <div class="service-card shadow-sm">
-                        <div class="service-content">
-                            <div class="icon-box">
-                                <img src="assets/software.png" class="floating">
-                            </div>
-                            <h3 class="fw-bold mb-3">Software & Aplicaciones</h3>
-                            <p class="text-muted mb-4">Ingeniería a medida, ERPs y soluciones móviles diseñadas para escalar su productividad.</p>
-                            <span class="fw-bold text-primary">Ver Capacidades <i class="ti ti-chevron-right"></i></span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 2. Seguridad Electrónica -->
-                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100" data-bs-toggle="modal" data-bs-target="#modalSeguridad">
-                    <div class="service-card shadow-sm">
-                        <div class="service-content">
-                            <div class="icon-box">
-                                <img src="assets/seguridad.png" class="floating">
-                            </div>
-                            <h3 class="fw-bold mb-3">Seguridad Electrónica</h3>
-                            <p class="text-muted mb-4">Vigilancia inteligente con analítica de IA, biometría y control perimetral táctico.</p>
-                            <span class="fw-bold text-primary">Ver Blindaje <i class="ti ti-chevron-right"></i></span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 3. Ciberseguridad -->
-                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200" data-bs-toggle="modal" data-bs-target="#modalCiber">
-                    <div class="service-card shadow-sm">
-                        <div class="service-content">
-                            <div class="icon-box">
-                                <img src="assets/ciberseguridad.png" class="floating">
-                            </div>
-                            <h3 class="fw-bold mb-3">Ciberseguridad</h3>
-                            <p class="text-muted mb-4">Protección Zero Trust de datos críticos, auditorías IT y defensa contra ransomware.</p>
-                            <span class="fw-bold text-primary">Ver Estrategia <i class="ti ti-chevron-right"></i></span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 4. Infraestructura de Redes -->
-                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-bs-toggle="modal" data-bs-target="#modalRedes">
-                    <div class="service-card shadow-sm">
-                        <div class="service-content">
-                            <div class="icon-box">
-                                <img src="assets/redes.png" class="floating">
-                            </div>
-                            <h3 class="fw-bold mb-3">Infraestructura de Redes</h3>
-                            <p class="text-muted mb-4">Backbone de fibra óptica, Wi-Fi 6 de alta densidad y telefonía IP avanzada.</p>
-                            <span class="fw-bold text-primary">Ver Ingeniería <i class="ti ti-chevron-right"></i></span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 5. Cloud Services -->
-                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100" data-bs-toggle="modal" data-bs-target="#modalCloud">
-                    <div class="service-card shadow-sm">
-                        <div class="service-content">
-                            <div class="icon-box">
-                                <img src="assets/nube.png" class="floating">
-                            </div>
-                            <h3 class="fw-bold mb-3">SENTRY Cloud</h3>
-                            <p class="text-muted mb-4">Gestión de infraestructuras elásticas, backups inmutables y migración segura a la nube.</p>
-                            <span class="fw-bold text-primary">Ver Ecosistema <i class="ti ti-chevron-right"></i></span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 6. Energía y UPS -->
-                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200" data-bs-toggle="modal" data-bs-target="#modalEnergia">
-                    <div class="service-card shadow-sm">
-                        <div class="service-content">
-                            <div class="icon-box">
-                                <img src="assets/energia.png" class="floating">
-                            </div>
-                            <h3 class="fw-bold mb-3">Energía Renovable</h3>
-                            <p class="text-muted mb-4">Sistemas solares industriales y respaldo crítico con tecnología de Litio LiFePO4.</p>
-                            <span class="fw-bold text-primary">Ver Respaldo <i class="ti ti-chevron-right"></i></span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 7. Hosting (Nuevo) -->
-                <div class="col-lg-12 mt-5 text-center" data-aos="zoom-in" data-bs-toggle="modal" data-bs-target="#modalHosting">
-                    <div class="service-card shadow-sm" style="max-width: 600px; margin: 0 auto; padding: 2rem;">
-                        <div class="service-content d-flex align-items-center gap-4 text-start">
-                            <div class="icon-box mb-0" style="width: 100px; height: 100px;">
-                                <img src="assets/nube.png" style="width: 70px; height: 70px; filter: hue-rotate(90deg);">
-                            </div>
-                            <div>
-                                <h3 class="fw-bold mb-2">SENTRY Hosting Élite</h3>
-                                <p class="text-muted mb-0 small">Dominios, Servidores NVMe de alta velocidad y backups diarios garantizados.</p>
-                            </div>
-                            <span class="ms-auto fw-bold text-primary"><i class="ti ti-arrow-up-right fs-2"></i></span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Clients -->
-    <section id="clientes" class="py-10 bg-white">
-        <div class="container text-center">
-            <h4 class="fw-bold text-muted mb-5 opacity-75">SENTRY ES CONFIADO POR LÍDERES LÍDERES EN LA REGIÓN</h4>
-            <div class="swiper" id="clientSwiper">
-                <div class="swiper-wrapper align-items-center">
-                    <div class="swiper-slide"><img src="https://upload.wikimedia.org/wikipedia/commons/4/4e/Tigo_logo.png" class="client-logo"></div>
-                    <div class="swiper-slide"><img src="https://upload.wikimedia.org/wikipedia/commons/0/05/Banco_Azteca_logo.svg" class="client-logo"></div>
-                    <div class="swiper-slide"><img src="https://upload.wikimedia.org/wikipedia/en/thumb/e/e8/Shell_logo.svg/1200px-Shell_logo.svg.png" class="client-logo"></div>
-                    <div class="swiper-slide"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Samsung_Logo.svg/2560px-Samsung_Logo.svg.png" class="client-logo"></div>
-                    <div class="swiper-slide"><span class="h4 fw-bold text-muted opacity-50">DISAGRO</span></div>
-                    <div class="swiper-slide"><span class="h4 fw-bold text-muted opacity-50">WAYAK</span></div>
-                    <div class="swiper-slide"><span class="h4 fw-bold text-muted opacity-50">MAXIAGRO</span></div>
-                </div>
-            </div>
+    <!-- Final Call to Action -->
+    <section class="cta">
+        <div class="container" data-aos="zoom-in">
+            <h2>¿Listo para <span class="text-glow">asegurar</span> su futuro?</h2>
+            <p>Hable con uno de nuestros científicos de datos y expertos en seguridad hoy mismo.</p>
+            <a href="https://wa.me/50252025252" target="_blank" class="btn-large">
+                <i class="ti ti-brand-whatsapp"></i> Iniciar Chat de Consultoría
+            </a>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="py-10 bg-dark text-white">
+    <footer>
         <div class="container">
-            <div class="row g-5">
-                <div class="col-lg-6">
-                    <div class="d-flex align-items-center mb-4">
-                        <img src="assets/logo.png" height="50" class="me-3" style="filter: brightness(0) invert(1);">
-                        <h2 class="text-white fw-bold mb-0">SENTRY</h2>
-                    </div>
-                    <p class="lead text-white opacity-75 mb-5" style="max-width: 450px;">
-                        Integradores expertos en soluciones tecnológicas de alto impacto. Sostenibilidad, innovación y seguridad total.
-                    </p>
-                    <div class="d-flex gap-3">
-                        <a href="https://wa.me/50252025252" class="btn btn-expert px-4 py-2">WhatsApp Directo</a>
-                    </div>
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h4>SENTRY</h4>
+                    <p>Integradores de Tecnología de Élite. Innovando la seguridad y conectividad de Guatemala.</p>
                 </div>
-                <div class="col-lg-6 text-lg-end">
-                    <h3 class="text-white fw-bold mb-4">+502 5202-5252</h3>
-                    <p class="text-white opacity-75 fs-5">ventas@sentrygt.com</p>
-                    <p class="text-white opacity-50 mt-5 small">&copy; 2024 SENTRY. Todos los derechos reservados.</p>
+                <div>
+                    <h5 style="margin-bottom:20px;">Servicios</h5>
+                    <ul style="list-style:none; display:grid; gap:10px; color:#64748B; font-size:14px;">
+                        <li>Ciberseguridad</li>
+                        <li>Seguridad Electrónica</li>
+                        <li>Cloud Computing</li>
+                        <li>Energía Solar</li>
+                    </ul>
                 </div>
+                <div>
+                    <h5 style="margin-bottom:20px;">Contacto</h5>
+                    <ul style="list-style:none; display:grid; gap:10px; color:#64748B; font-size:14px;">
+                        <li>+502 5202-5252</li>
+                        <li>ventas@sentrygt.com</li>
+                        <li>Guatemala, C.A.</li>
+                    </ul>
+                </div>
+                <div style="text-align:right;">
+                    <img src="assets/logo.png" height="50">
+                </div>
+            </div>
+            <div style="margin-top:80px; text-align:center; padding-top:40px; border-top:1px solid rgba(0,0,0,0.05); color:#94A3B8; font-size:12px;">
+                &copy; 2024 SENTRY. Todos los derechos reservados.
             </div>
         </div>
     </footer>
 
-    <!-- MODALES CON INFORMACION EXTRACTADA DE SLIDES -->
-
-    <!-- Modal Software (Slide 4) -->
-    <div class="modal fade" id="modalSoftware" tabindex="-1">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header-gradient">
-                    <h2 class="fw-bold mb-2">Desarrollo de Software</h2>
-                    <p class="mb-0 opacity-75">Ecosistema Digital a Medida</p>
-                </div>
-                <div class="modal-body">
-                    <h4 class="fw-bold mb-4">Optimización mediante Aplicaciones</h4>
-                    <ul class="feature-list list-unstyled">
-                        <li><i class="ti ti-circle-check"></i> <strong>Sistemas a Medida:</strong> Diseño y desarrollo 100% ajustado a sus procesos core.</li>
-                        <li><i class="ti ti-circle-check"></i> <strong>Apps Web & Móviles:</strong> Presencia efectiva en cualquier dispositivo y sistema operativo.</li>
-                        <li><i class="ti ti-circle-check"></i> <strong>Sistemas de Gestión:</strong> ERPs, CRMs y módulos para Hoteles, Clínicas y Oficinas Jurídicas.</li>
-                        <li><i class="ti ti-circle-check"></i> <strong>Administración Educativa:</strong> Plataformas para centros escolares y universidades.</li>
-                    </ul>
-                    <hr class="my-5">
-                    <div class="row align-items-center">
-                        <div class="col-sm-8">
-                            <h5 class="fw-bold">¿Necesita un ERP o CRM específico?</h5>
-                            <p class="text-muted small mb-0">Nuestros analistas diseñan el flujo lógico antes de escribir una sola línea de código.</p>
-                        </div>
-                        <div class="col-sm-4 text-end">
-                            <a href="https://wa.me/50252025252" target="_blank" class="btn btn-expert">Cotizar</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal Seguridad (Slide 5) -->
-    <div class="modal fade" id="modalSeguridad" tabindex="-1">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header-gradient" style="background: linear-gradient(135deg, #059669 0%, #10b981 100%);">
-                    <h2 class="fw-bold mb-2">Seguridad Electrónica</h2>
-                    <p class="mb-0 opacity-75">Sistemas de Protección Táctica</p>
-                </div>
-                <div class="modal-body">
-                    <h4 class="fw-bold mb-4">Vigilancia de Grado Militar</h4>
-                    <ul class="feature-list list-unstyled">
-                        <li><i class="ti ti-shield-check"></i> <strong>IA Video Analytics:</strong> CCTV con detección de comportamiento y patrones sospechosos.</li>
-                        <li><i class="ti ti-shield-check"></i> <strong>Monitoreo Remoto:</strong> Control total de cámaras, GPS y alarmas vía App centralizada.</li>
-                        <li><i class="ti ti-shield-check"></i> <strong>Smart Access Control:</strong> Cerraduras inteligentes para Hoteles, Oficinas y Residencias (Biometría).</li>
-                        <li><i class="ti ti-shield-check"></i> <strong>Sistemas Contraincendios:</strong> Detección temprana y protocolos de evacuación automatizados.</li>
-                    </ul>
-                    <div class="p-4 bg-label-success rounded-4 mt-5">
-                        <h6 class="fw-bold">Integración SENTRY Core</h6>
-                        <p class="small mb-0">Fusionamos GPS, CCTV y Alarmas en un solo panel de control unificado.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal Ciberseguridad (Slide 6) -->
-    <div class="modal fade" id="modalCiber" tabindex="-1">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header-gradient" style="background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%);">
-                    <h2 class="fw-bold mb-2">Ciberseguridad</h2>
-                    <p class="mb-0 opacity-75">Blindaje Digital de Alta Disponibilidad</p>
-                </div>
-                <div class="modal-body">
-                    <h4 class="fw-bold mb-4">Estrategia de Defensa Profunda</h4>
-                    <div class="row g-4">
-                        <div class="col-md-6 text-center p-3 border rounded-4">
-                            <i class="ti ti-lock fs-1 text-danger"></i>
-                            <h6 class="fw-bold mt-2">Perímetro Seguro</h6>
-                            <p class="small text-muted">Firewalls, VPNs y mitigación de ataques externos.</p>
-                        </div>
-                        <div class="col-md-6 text-center p-3 border rounded-4">
-                            <i class="ti ti-license fs-1 text-danger"></i>
-                            <h6 class="fw-bold mt-2">Licenciamiento Genuino</h6>
-                            <p class="small text-muted">Modelos de renta mensual (SaaS) escalables.</p>
-                        </div>
-                    </div>
-                    <ul class="feature-list list-unstyled mt-5">
-                        <li><i class="ti ti-check text-danger"></i> <strong>Políticas Internas:</strong> Garantizamos la integridad de la información confidencial.</li>
-                        <li><i class="ti ti-check text-danger"></i> <strong>Awareness:</strong> Programas de concientización y formación para sus colaboradores.</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal Redes (Slide 7) -->
-    <div class="modal fade" id="modalRedes" tabindex="-1">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header-gradient" style="background: linear-gradient(135deg, #0284c7 0%, #0ea5e9 100%);">
-                    <h2 class="fw-bold mb-2">Infraestructura de Redes</h2>
-                    <p class="mb-0 opacity-75">Conectividad de Alto Rendimiento</p>
-                </div>
-                <div class="modal-body">
-                    <h4 class="fw-bold mb-4">Diseño de Redes Críticas</h4>
-                    <ul class="feature-list list-unstyled">
-                        <li><i class="ti ti-network"></i> <strong>Fibras Ópticas:</strong> Backbone de datos para voz, video y redundancia total.</li>
-                        <li><i class="ti ti-wifi"></i> <strong>Wi-Fi Pro:</strong> Diseño basado en mapas de calor para cobertura perfecta en Hoteles y Banca.</li>
-                        <li><i class="ti ti-device-landline-phone"></i> <strong>Telefonía IP:</strong> Centrales virtuales y plantas telefónicas de nueva generación.</li>
-                        <li><i class="ti ti-building-skyscraper"></i> <strong>Verticales:</strong> Soluciones para construcción, eventos masivos y banca.</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal Cloud (Slide 8) -->
-    <div class="modal fade" id="modalCloud" tabindex="-1">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header-gradient" style="background: linear-gradient(135deg, #8b5cf6 0%, #a855f7 100%);">
-                    <h2 class="fw-bold mb-2">SENTRY Cloud Strategy</h2>
-                    <p class="mb-0 opacity-75">Infraestructuras Elásticas e Inmutables</p>
-                </div>
-                <div class="modal-body">
-                    <h4 class="fw-bold mb-4">Servicios Public Cloud & Hybrid</h4>
-                    <ul class="feature-list list-unstyled">
-                        <li><i class="ti ti-cloud-download"></i> <strong>Cloud Backup:</strong> Respaldo de servidores y grabaciones de CCTV.</li>
-                        <li><i class="ti ti-layers-intersect"></i> <strong>Redes Virtuales:</strong> Load balancing, VPNs corporativas y Firewalls virtuales.</li>
-                        <li><i class="ti ti-mail-fast"></i> <strong>Correo Elite:</strong> Plataformas robustas de correo corporativo certificadas.</li>
-                        <li><i class="ti ti-server-cog"></i> <strong>VPS Escalables:</strong> Servidores en la nube configurados para alto tráfico.</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal Energía (Slide 9) -->
-    <div class="modal fade" id="modalEnergia" tabindex="-1">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header-gradient" style="background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%);">
-                    <h2 class="fw-bold mb-2">Energía Renovable</h2>
-                    <p class="mb-0 opacity-75">Sostenibilidad y Continuidad Crítica</p>
-                </div>
-                <div class="modal-body">
-                    <h4 class="fw-bold mb-4">Respaldo Energético Inteligente</h4>
-                    <ul class="feature-list list-unstyled">
-                        <li><i class="ti ti-sun"></i> <strong>Ingeniería Solar:</strong> Diseño e instalación de sistemas fotovoltaicos inyectables.</li>
-                        <li><i class="ti ti-battery-4"></i> <strong>UPS de Litio:</strong> Respaldo de alta densidad para centros de datos y plantas eléctricas.</li>
-                        <li><i class="ti ti-chart-dots"></i> <strong>Monitoreo Real-Time:</strong> Control constante de flujos energéticos y eficiencia.</li>
-                        <li><i class="ti ti-leaf"></i> <strong>Impacto Ambiental:</strong> Evaluaciones y certificaciones de reducción de huella de carbono.</li>
-                    </ul>
-                    <p class="text-muted mt-5 small fst-italic">"Educamos y concientizamos sobre la integración de energías renovables en redes inteligentes."</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal Hosting (Added) -->
-    <div class="modal fade" id="modalHosting" tabindex="-1">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header-gradient" style="background: linear-gradient(135deg, #1e293b 0%, #334155 100%);">
-                    <h2 class="fw-bold mb-2">Hosting Élite & Dominios</h2>
-                    <p class="mb-0 opacity-75">Tu Hogar Digital de Alta Velocidad</p>
-                </div>
-                <div class="modal-body">
-                    <h4 class="fw-bold mb-4">Potencia y Velocidad NVMe</h4>
-                    <p>En SENTRY garantizamos que su sitio web sea una herramienta de venta imparable con tiempos de carga líderes en el mercado guatemalteco.</p>
-                    <ul class="feature-list list-unstyled mt-5">
-                        <li><i class="ti ti-rocket"></i> <strong>Almacenamiento NVMe:</strong> 10x más rápido que discos SSD tradicionales.</li>
-                        <li><i class="ti ti-certificate"></i> <strong>SSL Gratis Perpetuo:</strong> Seguridad total para sus visitantes.</li>
-                        <li><i class="ti ti-backup"></i> <strong>Daily Backups:</strong> Copias de seguridad automáticas de cada archivo y base de datos.</li>
-                        <li><i class="ti ti-headset"></i> <strong>Soporte 24/7/365:</strong> Un equipo experto siempre listo para asistirle.</li>
-                    </ul>
-                    <a href="https://wa.me/50252025252" target="_blank" class="btn btn-expert w-100 py-3 mt-4">Consultar Planes de Hosting</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <!-- Scripts -->
-    <script src="assets_vuexy/vendor/libs/jquery/jquery.js"></script>
-    <script src="assets_vuexy/vendor/libs/popper/popper.js"></script>
-    <script src="assets_vuexy/vendor/js/bootstrap.bundle.js"></script>
-    <script src="assets_vuexy/vendor/libs/node-waves/node-waves.js"></script>
-    <script src="assets_vuexy/vendor/libs/swiper/swiper.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-    
     <script>
         AOS.init({ duration: 1000, once: true });
-        
-        new Swiper('#clientSwiper', {
-            slidesPerView: 2,
-            spaceBetween: 50,
-            autoplay: { delay: 2000 },
-            loop: true,
-            breakpoints: {
-                640: { slidesPerView: 3 },
-                1024: { slidesPerView: 5 },
-            }
-        });
 
-        window.onscroll = function() {
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.style.padding = '12px 0';
+                navbar.style.boxShadow = '0 10px 30px rgba(0,0,0,0.05)';
+            } else {
+                navbar.style.padding = '20px 0';
+                navbar.style.boxShadow = 'none';
+            }
+
+            // Progress Bar
             let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
             let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
             let scrolled = (winScroll / height) * 100;
             document.getElementById("progress-bar").style.width = scrolled + "%";
-        };
+        });
     </script>
 </body>
 </html>
