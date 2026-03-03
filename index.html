@@ -1,344 +1,240 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="layout-navbar-fixed layout-wide" dir="ltr" data-skin="default" data-bs-theme="light" data-assets-path="assets_vuexy/" data-template="front-pages">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Portafolio de SmartNet - Gestión Integral de Seguridad, NOC, Drones y Tecnología.">
-    <title>SmartNet | Security Management System & NOC</title>
-    
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
-    
-    <!-- AOS.js -->
-    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
-    
-    <!-- Swiper CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+    <title>SmartNet | Gestión Integral de Seguridad & NOC</title>
+    <meta name="description" content="Portafolio de SmartNet - Gestión Integral de Seguridad, NOC, Drones y Tecnología en Guatemala." />
 
-    <!-- Font Awesome -->
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/logo.png" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&amp;display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="assets_vuexy/vendor/fonts/tabler-icons.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
+    <!-- Core CSS -->
+    <link rel="stylesheet" href="assets_vuexy/vendor/css/rtl/core.css" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="assets_vuexy/vendor/css/rtl/theme-default.css" class="template-customizer-theme-css" />
+    <link rel="stylesheet" href="assets_vuexy/css/demo.css" />
+    <link rel="stylesheet" href="assets_vuexy/vendor/css/pages/front-page.css" />
+
+    <!-- Vendors CSS -->
+    <link rel="stylesheet" href="assets_vuexy/vendor/libs/node-waves/node-waves.css" />
+    <link rel="stylesheet" href="assets_vuexy/vendor/libs/swiper/swiper.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
+
+    <!-- Page CSS -->
+    <link rel="stylesheet" href="assets_vuexy/vendor/css/pages/front-page-landing.css" />
+
+    <!-- Helpers -->
+    <script src="assets_vuexy/vendor/js/helpers.js"></script>
+    <script src="assets_vuexy/js/front-config.js"></script>
+
     <style>
-        body { font-family: 'Outfit', sans-serif; scroll-behavior: smooth; overflow-x: hidden; }
-
-        /* Progress Bar */
-        #progress-bar { position: fixed; top: 0; left: 0; height: 5px; background: linear-gradient(to right, #4f46e5, #ef4444, #22c55e); width: 0%; z-index: 1000; transition: width 0.1s ease; }
-
-        /* Hero Slider */
-        .hero-swiper { width: 100%; height: 95vh; min-height: 800px; }
-        .swiper-slide { padding-top: 80px; display: flex; align-items: center; }
-        .hero-content { opacity: 0; transform: translateY(40px); transition: all 1s cubic-bezier(0.16, 1, 0.3, 1); }
-        .swiper-slide-active .hero-content { opacity: 1; transform: translateY(0); }
-        .hero-image { opacity: 0; transform: scale(0.85) translateX(50px); transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1); transition-delay: 0.2s; }
-        .swiper-slide-active .hero-image { opacity: 1; transform: scale(1) translateX(0); }
-        .swiper-pagination-bullet { width: 10px; height: 10px; background: #4f46e5; opacity: 0.2; }
-        .swiper-pagination-bullet-active { opacity: 1; width: 35px; border-radius: 5px; }
-
-        /* Glassmorphism */
-        nav { backdrop-filter: blur(20px); background: rgba(255, 255, 255, 0.75); }
-        .glass-card { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.3); }
-
-        .gradient-text { background: linear-gradient(135deg, #4f46e5 0%, #9333ea 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .danger-text { background: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        
-        .service-card { transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
-        .service-card:hover { transform: translateY(-15px); box-shadow: 0 40px 80px -15px rgba(79, 70, 229, 0.2); }
-
-        /* Infinite Slider */
-        @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(calc(-250px * 7)); } }
-        .slider .slide-track { animation: scroll 40s linear infinite; display: flex; width: calc(250px * 14); }
-        .slider .slide { height: 120px; width: 250px; display: flex; align-items: center; justify-content: center; padding: 20px; }
-        .slider .slide img { width: 100%; height: auto; object-fit: contain; filter: grayscale(100%); opacity: 0.4; transition: all 0.4s ease; }
-        .slider .slide img:hover { filter: grayscale(0%); opacity: 1; transform: scale(1.05); }
-
-        /* Floating Animation */
-        @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-25px); } }
+        body { font-family: 'Outfit', 'Public Sans', sans-serif; }
+        .hero-swiper { width: 100%; height: 90vh; min-height: 750px; }
+        .swiper-slide { display: flex; align-items: center; background: #fff; }
+        .gradient-text { background: linear-gradient(135deg, #7367f0 0%, #ce93d8 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .floating { animation: float 6s ease-in-out infinite; }
-
-        .feature-tag { @apply inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-indigo-50 text-indigo-600 text-[10px] font-bold uppercase tracking-wider mb-2; }
+        @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-20px); } }
+        .service-card { transition: all 0.3s ease; border-radius: 2rem !important; }
+        .service-card:hover { transform: translateY(-10px); box-shadow: 0 1rem 3rem rgba(115, 103, 240, 0.15) !important; }
+        .section-py { padding-top: 6rem; padding-bottom: 6rem; }
+        .navbar { backdrop-filter: blur(10px); background: rgba(255, 255, 255, 0.8) !important; }
+        .feature-tag { @apply badge bg-label-primary mb-3; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; }
+        #progress-bar { position: fixed; top: 0; left: 0; height: 4px; background: #7367f0; width: 0%; z-index: 9999; transition: width 0.1s ease; }
     </style>
 </head>
-<body class="bg-[#fcfdff] text-slate-900">
 
+<body>
     <div id="progress-bar"></div>
+    <script src="assets_vuexy/vendor/js/dropdown-hover.js"></script>
 
-    <nav class="fixed w-full z-50 border-b border-indigo-50/50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-20">
-                <div class="flex items-center gap-3">
-                    <img src="assets/logo.png" alt="SmartNet Logo" class="h-12 w-auto">
-                    <span class="text-2xl font-bold tracking-tight text-indigo-700">SmartNet</span>
+    <!-- Navbar: Start -->
+    <nav class="layout-navbar shadow-none py-0">
+        <div class="container-xxl">
+            <div class="navbar navbar-expand-lg landing-navbar px-3 px-md-4">
+                <div class="navbar-brand app-brand demo d-flex py-0 me-4 ms-0">
+                    <a href="index.html" class="app-brand-link">
+                        <span class="app-brand-logo demo">
+                            <img src="assets/logo.png" alt="SmartNet" style="height: 32px;">
+                        </span>
+                        <span class="app-brand-text demo menu-text fw-bold ms-2 ps-1 text-primary">SmartNet</span>
+                    </a>
                 </div>
-                <div class="hidden md:flex items-center space-x-10">
-                    <a href="#inicio" class="text-sm font-semibold hover:text-indigo-600 transition">Inicio</a>
-                    <a href="#sistema" class="text-sm font-semibold hover:text-indigo-600 transition">Nuestro Sistema</a>
-                    <a href="#noc" class="text-sm font-semibold hover:text-indigo-600 transition">NOC</a>
-                    <a href="#servicios" class="text-sm font-semibold hover:text-indigo-600 transition">Servicios</a>
-                    <a href="#contacto" class="bg-indigo-600 text-white px-7 py-3 rounded-2xl font-bold hover:bg-indigo-700 transition shadow-xl shadow-indigo-200">Contáctanos</a>
+                <div class="collapse navbar-collapse landing-nav-menu" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item"><a class="nav-link fw-medium" href="#inicio">Inicio</a></li>
+                        <li class="nav-item"><a class="nav-link fw-medium" href="#sistema">Nuestro Sistema</a></li>
+                        <li class="nav-item"><a class="nav-link fw-medium" href="#noc">NOC</a></li>
+                        <li class="nav-item"><a class="nav-link fw-medium" href="#servicios">Servicios</a></li>
+                    </ul>
                 </div>
+                <ul class="navbar-nav flex-row align-items-center ms-auto">
+                    <li><a href="#contacto" class="btn btn-primary"><span class="tf-icons ti ti-mail me-md-1"></span><span class="d-none d-md-block">Contáctanos</span></a></li>
+                </ul>
             </div>
         </div>
     </nav>
+    <!-- Navbar: End -->
 
-    <!-- Header Section (Swiper) -->
-    <section id="inicio" class="relative overflow-hidden bg-white">
+    <!-- Hero Section -->
+    <section id="inicio" class="section-py landing-hero position-relative">
         <div class="swiper hero-swiper">
             <div class="swiper-wrapper">
                 
-                <!-- Slide 1: Sistema de Gestión Especializado -->
+                <!-- Slide 1: Sistema -->
                 <div class="swiper-slide">
-                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full grid grid-cols-1 lg:grid-cols-2 items-center gap-16">
-                        <div class="hero-content">
-                            <div class="feature-tag">
-                                <span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span> Sistema All-in-One
+                    <div class="container-xxl">
+                        <div class="row align-items-center g-5">
+                            <div class="col-lg-6">
+                                <span class="badge bg-label-primary mb-3">SISTEMA ALL-IN-ONE</span>
+                                <h1 class="display-4 fw-bold mb-4">Gestión de Seguridad <br><span class="gradient-text">Integral & FEL</span></h1>
+                                <p class="lead text-muted mb-5">Centralice todo: CCTV, Biometría, Control de Armas, Activos y Facturación FEL en una única plataforma inteligente. El cerebro de su operación.</p>
+                                <div class="d-flex flex-wrap gap-3">
+                                    <a href="#sistema" class="btn btn-primary btn-lg px-5 py-3">Ver Demo del Software</a>
+                                    <a href="#contacto" class="btn btn-outline-primary btn-lg px-5 py-3">Solicitar Info</a>
+                                </div>
                             </div>
-                            <h1 class="text-5xl md:text-7xl font-bold mb-8 leading-[1.1]">
-                                Gestión de Seguridad <br><span class="gradient-text">Integral & FEL</span>
-                            </h1>
-                            <p class="text-lg text-slate-600 mb-10 leading-relaxed max-w-lg">
-                                Centralice todo: CCTV, Biometría, Control de Armas, Activos y Facturación FEL en una única plataforma inteligente. El cerebro de su operación.
-                            </p>
-                            <div class="grid grid-cols-2 gap-4 mb-10">
-                                <div class="flex items-center gap-2 text-sm font-semibold text-slate-500"><i class="fas fa-check-circle text-indigo-500"></i> GPS & Asistencia</div>
-                                <div class="flex items-center gap-2 text-sm font-semibold text-slate-500"><i class="fas fa-check-circle text-indigo-500"></i> Facturación FEL</div>
-                                <div class="flex items-center gap-2 text-sm font-semibold text-slate-500"><i class="fas fa-check-circle text-indigo-500"></i> Licencias Armas</div>
-                                <div class="flex items-center gap-2 text-sm font-semibold text-slate-500"><i class="fas fa-check-circle text-indigo-500"></i> Gestión Agentes</div>
+                            <div class="col-lg-6">
+                                <img src="assets/hero-sistema.png" alt="Hero" class="img-fluid floating">
                             </div>
-                            <a href="#sistema" class="inline-block px-10 py-5 bg-indigo-600 text-white font-bold rounded-[22px] shadow-2xl shadow-indigo-200 hover:bg-indigo-700 transition">Ver Demo del Software</a>
-                        </div>
-                        <div class="hero-image relative">
-                            <img src="assets/hero-sistema.png" alt="Sistema Gestion" class="w-full h-auto drop-shadow-3xl floating">
                         </div>
                     </div>
                 </div>
 
-                <!-- Slide 2: Rondas & Pánico -->
-                <div class="swiper-slide bg-slate-50">
-                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full grid grid-cols-1 lg:grid-cols-2 items-center gap-16">
-                        <div class="hero-content">
-                            <div class="feature-tag bg-red-50 text-red-600">Respuesta Inmediata</div>
-                            <h1 class="text-5xl md:text-7xl font-bold mb-8 leading-[1.1]">
-                                Botón de Pánico <br><span class="danger-text">& Rondas GPS</span>
-                            </h1>
-                            <p class="text-lg text-slate-600 mb-10 leading-relaxed max-w-lg">
-                                Visualice en tiempo real las rondas de sus guardias y brinde asistencia inmediata ante emergencias mediante nuestro Botón de Pánico Móvil.
-                            </p>
-                            <div class="flex gap-4">
-                                <img src="assets/rondas.png" alt="Rondas" class="w-32 h-32 rounded-3xl shadow-lg object-cover border-4 border-white">
-                                <img src="assets/panico.png" alt="Panico" class="w-32 h-32 rounded-3xl shadow-lg object-cover border-4 border-white">
+                <!-- Slide 2: Rondas -->
+                <div class="swiper-slide bg-light">
+                    <div class="container-xxl">
+                        <div class="row align-items-center g-5">
+                            <div class="col-lg-6">
+                                <span class="badge bg-label-danger mb-3">RESPUESTA INMEDIATA</span>
+                                <h1 class="display-4 fw-bold mb-4">Botón de Pánico <br><span class="text-danger">& Rondas GPS</span></h1>
+                                <p class="lead text-muted mb-5">Visualice en tiempo real las rondas de sus guardias y brinde asistencia inmediata ante emergencias mediante nuestro Botón de Pánico Móvil.</p>
+                                <div class="d-flex gap-3">
+                                    <img src="assets/rondas.png" class="rounded-4 shadow" style="width: 100px; height: 100px; object-fit: cover;">
+                                    <img src="assets/panico.png" class="rounded-4 shadow" style="width: 100px; height: 100px; object-fit: cover;">
+                                </div>
                             </div>
-                        </div>
-                        <div class="hero-image">
-                            <img src="assets/rondas.png" alt="Animacion Rondas" class="w-full h-auto drop-shadow-2xl floating">
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Slide 3: Drones & NOC -->
-                <div class="swiper-slide">
-                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full grid grid-cols-1 lg:grid-cols-2 items-center gap-16">
-                        <div class="hero-content">
-                            <div class="feature-tag bg-blue-50 text-blue-600">Vigilancia Aérea</div>
-                            <h1 class="text-5xl md:text-7xl font-bold mb-8 leading-[1.1]">
-                                Vigilancia por <br><span class="text-blue-600">Drones & NOC</span>
-                            </h1>
-                            <p class="text-lg text-slate-600 mb-10 leading-relaxed max-w-lg">
-                                Centro de monitoreo 24/7 con integración de flotas de drones para perímetros extensos y supervisión táctica.
-                            </p>
-                            <a href="#noc" class="inline-block px-10 py-5 bg-slate-900 text-white font-bold rounded-[22px] shadow-2xl hover:bg-black transition">Conocer el NOC</a>
-                        </div>
-                        <div class="hero-image relative">
-                            <img src="assets/noc.png" alt="Centro Monitoreo" class="w-full h-auto drop-shadow-2xl floating">
+                            <div class="col-lg-6">
+                                <img src="assets/rondas.png" alt="Rondas" class="img-fluid floating">
+                            </div>
                         </div>
                     </div>
                 </div>
 
             </div>
             <div class="swiper-pagination"></div>
-            <div class="swiper-button-next !text-indigo-600/40 hover:!text-indigo-600 transition"></div>
-            <div class="swiper-button-prev !text-indigo-600/40 hover:!text-indigo-600 transition"></div>
         </div>
     </section>
 
-    <!-- Sistema Detalle Section -->
-    <section id="sistema" class="py-32 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-24" data-aos="fade-up">
-                <h2 class="text-indigo-600 font-bold uppercase tracking-widest text-xs mb-4">Potencia Operativa</h2>
-                <h3 class="text-4xl md:text-5xl font-bold mb-8 italic">SmartNet Security Management System</h3>
-                <p class="text-slate-500 max-w-3xl mx-auto text-lg leading-relaxed">
-                    Nuestra plataforma no solo monitorea, gestiona la rentabilidad y legalidad de su empresa de seguridad.
-                </p>
+    <!-- Sistema Detalle -->
+    <section id="sistema" class="section-py bg-body">
+        <div class="container-xxl">
+            <div class="text-center mb-5">
+                <span class="badge bg-label-primary">POTENCIA OPERATIVA</span>
+                <h2 class="h1 fw-bold mt-2">SmartNet Security Management</h2>
+                <p class="text-muted mx-auto" style="max-width: 600px;">Nuestra plataforma no solo monitorea, gestiona la rentabilidad y legalidad de su empresa de seguridad.</p>
             </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="glass-card p-10 rounded-[40px] hover:border-indigo-200 transition" data-aos="fade-up" data-aos-delay="100">
-                    <i class="fas fa-fingerprint text-4xl text-indigo-600 mb-6"></i>
-                    <h4 class="text-xl font-bold mb-4">Biometría Celular</h4>
-                    <p class="text-slate-500">Control de asistencia y acceso mediante reconocimiento facial y huella desde cualquier dispositivo móvil.</p>
+            <div class="row g-4">
+                <div class="col-md-4" data-aos="fade-up">
+                    <div class="card service-card h-100 border-0 shadow-sm p-4">
+                        <div class="avatar avatar-lg bg-label-primary mb-4"><i class="ti ti-fingerprint fs-2"></i></div>
+                        <h4 class="fw-bold">Biometría Celular</h4>
+                        <p class="text-muted">Control de asistencia y acceso mediante reconocimiento facial y huella desde cualquier dispositivo móvil.</p>
+                    </div>
                 </div>
-                <div class="glass-card p-10 rounded-[40px] hover:border-indigo-200 transition" data-aos="fade-up" data-aos-delay="200">
-                    <i class="fas fa-file-invoice-dollar text-4xl text-green-600 mb-6"></i>
-                    <h4 class="text-xl font-bold mb-4">Facturación FEL</h4>
-                    <p class="text-slate-500">Integración nativa con SAT Guatemala para emitir facturas electrónicas de servicios de seguridad automáticamente.</p>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="card service-card h-100 border-0 shadow-sm p-4">
+                        <div class="avatar avatar-lg bg-label-success mb-4"><i class="ti ti-file-invoice fs-2"></i></div>
+                        <h4 class="fw-bold">Facturación FEL</h4>
+                        <p class="text-muted">Integración nativa con SAT Guatemala para emitir facturas electrónicas de servicios automáticamente.</p>
+                    </div>
                 </div>
-                <div class="glass-card p-10 rounded-[40px] hover:border-indigo-200 transition" data-aos="fade-up" data-aos-delay="300">
-                    <i class="fas fa-gun text-4xl text-slate-800 mb-6"></i>
-                    <h4 class="text-xl font-bold mb-4">Control de Armas</h4>
-                    <p class="text-slate-500">Gestión de licencias de DIGECAM, inventario de municiones y asignación a agentes en tiempo real.</p>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="card service-card h-100 border-0 shadow-sm p-4">
+                        <div class="avatar avatar-lg bg-label-secondary mb-4"><i class="ti ti-shield-lock fs-2"></i></div>
+                        <h4 class="fw-bold">Control de Armas</h4>
+                        <p class="text-muted">Gestión de licencias de DIGECAM, inventario de municiones y asignación a agentes en tiempo real.</p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- NOC Section -->
-    <section id="noc" class="py-32 bg-slate-900 text-white relative overflow-hidden">
-        <div class="absolute top-0 right-0 w-1/2 h-full bg-indigo-600/10 skew-x-12 translate-x-32"></div>
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
-                <div data-aos="fade-right">
-                    <div class="feature-tag bg-white/10 text-indigo-400">24/7/365 Monitoring</div>
-                    <h3 class="text-5xl font-bold mb-8">Centro de Monitoreo <span class="text-indigo-500">NOC SmartNet</span></h3>
-                    <p class="text-xl text-slate-400 mb-10 leading-relaxed">
-                        Nuestro Network Operations Center es la vanguardia en vigilancia. Monitoreamos activamente:
-                    </p>
-                    <ul class="space-y-6">
-                        <li class="flex items-center gap-4"><div class="w-12 h-12 rounded-xl bg-indigo-500/20 flex items-center justify-center text-indigo-400"><i class="fas fa-video"></i></div> <span class="font-semibold text-lg">CCTV de Alta Definición con Analítica</span></li>
-                        <li class="flex items-center gap-4"><div class="w-12 h-12 rounded-xl bg-indigo-500/20 flex items-center justify-center text-indigo-400"><i class="fas fa-satellite-dish"></i></div> <span class="font-semibold text-lg">GPS Satelital Multiflota y Agentes</span></li>
-                        <li class="flex items-center gap-4"><div class="w-12 h-12 rounded-xl bg-indigo-500/20 flex items-center justify-center text-indigo-400"><i class="fas fa-plane"></i></div> <span class="font-semibold text-lg">Telemtría de Drones en Tiempo Real</span></li>
-                        <li class="flex items-center gap-4"><div class="w-12 h-12 rounded-xl bg-indigo-500/20 flex items-center justify-center text-indigo-400"><i class="fas fa-bell"></i></div> <span class="font-semibold text-lg">Alarmas Críticas e Intrusiones</span></li>
+    <section id="noc" class="section-py bg-dark text-white position-relative overflow-hidden">
+        <div class="container-xxl">
+            <div class="row align-items-center g-5">
+                <div class="col-lg-6" data-aos="fade-right">
+                    <span class="badge bg-label-info mb-3">CENTRO DE MONITOREO 24/7</span>
+                    <h2 class="display-5 fw-bold text-white mb-4">NOC SmartNet</h2>
+                    <p class="text-light opacity-75 lead mb-5">Nuestro Network Operations Center es la vanguardia en vigilancia avanzada en Guatemala.</p>
+                    <ul class="list-unstyled space-y-4">
+                        <li class="d-flex align-items-center gap-3 mb-4"><i class="ti ti-video text-info fs-3"></i> CCTV con Analítica de Video</li>
+                        <li class="d-flex align-items-center gap-3 mb-4"><i class="ti ti-map-pin text-info fs-3"></i> Tracking GPS de Flotas y Agentes</li>
+                        <li class="d-flex align-items-center gap-3 mb-4"><i class="ti ti-helicopter text-info fs-3"></i> Telemetría de Drones en Tiempo Real</li>
                     </ul>
                 </div>
-                <div class="relative" data-aos="fade-left">
-                    <img src="assets/noc.png" alt="NOC Room" class="rounded-[40px] shadow-2xl border-4 border-white/5">
-                    <div class="absolute -bottom-10 -left-10 bg-indigo-600 p-8 rounded-3xl shadow-xl hidden md:block">
-                        <span class="text-4xl font-bold">99.9%</span>
-                        <p class="text-xs uppercase tracking-widest font-bold opacity-70">Uptime de Vigilancia</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Brands & Success Stories -->
-    <section class="py-32 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h4 class="text-sm font-bold text-slate-400 uppercase tracking-[0.3em] mb-4">Alianzas Tecnológicas</h4>
-                <div class="slider">
-                    <div class="slide-track">
-                        <div class="slide"><img src="https://logo.clearbit.com/hikvision.com" alt="Hikvision"></div>
-                        <div class="slide"><img src="https://logo.clearbit.com/dahuasecurity.com" alt="Dahua"></div>
-                        <div class="slide"><img src="https://logo.clearbit.com/axis.com" alt="Axis"></div>
-                        <div class="slide"><img src="https://logo.clearbit.com/dji.com" alt="DJI"></div>
-                        <div class="slide"><img src="https://logo.clearbit.com/ubnt.com" alt="Ubiquiti"></div>
-                        <div class="slide"><img src="https://logo.clearbit.com/cisco.com" alt="Cisco"></div>
-                        <!-- Repeat -->
-                        <div class="slide"><img src="https://logo.clearbit.com/hikvision.com" alt="Hikvision"></div>
-                        <div class="slide"><img src="https://logo.clearbit.com/dahuasecurity.com" alt="Dahua"></div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="mt-32">
-                <h3 class="text-4xl font-bold text-center mb-16">Casos de Éxito en <span class="text-indigo-600">Guatemala</span></h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-                    <div class="bg-slate-50 p-12 rounded-[50px] border border-slate-100" data-aos="fade-right">
-                        <div class="text-indigo-600 mb-6"><i class="fas fa-quote-left text-4xl"></i></div>
-                        <p class="text-xl italic text-slate-700 mb-8 leading-relaxed">
-                            "Logramos reducir las brechas de seguridad en nuestros centros de distribución en un 40% gracias al sistema de gestión y monitoreo por drones de SmartNet."
-                        </p>
-                        <div class="flex items-center gap-4">
-                            <img src="https://logo.clearbit.com/tigo.com.gt" class="w-12 h-12 rounded-full object-contain bg-white">
-                            <div>
-                                <h5 class="font-bold">Gerencia de Seguridad Regional</h5>
-                                <p class="text-xs text-slate-500 font-bold uppercase tracking-widest">Sector Telecomunicaciones</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="bg-slate-50 p-12 rounded-[50px] border border-slate-100" data-aos="fade-left">
-                        <div class="text-indigo-600 mb-6"><i class="fas fa-quote-left text-4xl"></i></div>
-                        <p class="text-xl italic text-slate-700 mb-8 leading-relaxed">
-                            "La integración de la facturación FEL y el control de asistencia GPS de SmartNet transformó nuestra eficiencia administrativa y operativa."
-                        </p>
-                        <div class="flex items-center gap-4">
-                            <img src="https://logo.clearbit.com/bancoazteca.com.gt" class="w-12 h-12 rounded-full object-contain bg-white">
-                            <div>
-                                <h5 class="font-bold">Dirección de Operaciones</h5>
-                                <p class="text-xs text-slate-500 font-bold uppercase tracking-widest">Sector Financiero</p>
-                            </div>
-                        </div>
-                    </div>
+                <div class="col-lg-6" data-aos="fade-left">
+                    <img src="assets/noc.png" class="img-fluid rounded-5 shadow-lg border border-secondary">
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="py-32 bg-black text-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-16 mb-20">
-                <div class="col-span-1 md:col-span-2">
-                    <img src="assets/logo.png" class="h-10 mb-8 brightness-0 invert">
-                    <h5 class="text-2xl font-bold mb-6">SmartNet Guatemala</h5>
-                    <p class="text-slate-500 max-w-sm mb-10 leading-relaxed">
-                        Liderando la transformación digital de la seguridad en Centroamérica con soluciones de grado gubernamental y corporativo.
-                    </p>
+    <footer class="footer bg-primary text-white py-5">
+        <div class="container-xxl">
+            <div class="row g-5">
+                <div class="col-lg-6">
+                    <div class="app-brand demo mb-4">
+                        <img src="assets/logo.png" style="height: 32px; filter: brightness(0) invert(1);">
+                        <span class="app-brand-text demo menu-text fw-bold ms-2 text-white">SmartNet</span>
+                    </div>
+                    <p class="text-white opacity-75 mb-4">Liderando la transformación digital de la seguridad en Centroamérica con soluciones de grado corporativo.</p>
                 </div>
-                <div>
-                    <h6 class="font-bold mb-8 text-indigo-400">Plataformas</h6>
-                    <ul class="space-y-4 text-slate-400 font-medium">
-                        <li><a href="#" class="hover:text-white transition">Sistema Gestión</a></li>
-                        <li><a href="#" class="hover:text-white transition">NOC Tracking</a></li>
-                        <li><a href="#" class="hover:text-white transition">Drones Vigilancia</a></li>
-                        <li><a href="#" class="hover:text-white transition">FEL Integrated</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h6 class="font-bold mb-8 text-indigo-400">Contacto</h6>
-                    <ul class="space-y-4 text-slate-400 font-medium">
-                        <li>ventas@smartnetgt.com</li>
-                        <li>+502 2200-0000</li>
-                        <li>Guatemala City, GT</li>
-                    </ul>
+                <div class="col-lg-6 text-lg-end">
+                    <h5 class="text-white mb-4">Guatemala City, GT</h5>
+                    <p class="text-white opacity-75">ventas@smartnetgt.com</p>
+                    <p class="text-white opacity-75">+502 2200-0000</p>
                 </div>
             </div>
-            <div class="border-t border-white/5 pt-12 flex flex-col md:row justify-between items-center gap-6">
-                <p class="text-slate-600 font-medium">&copy; 2024 SmartNet. Innovación que protege.</p>
-                <div class="flex gap-8 text-xl text-slate-600">
-                    <a href="#" class="hover:text-indigo-500 transition"><i class="fab fa-linkedin"></i></a>
-                    <a href="#" class="hover:text-indigo-500 transition"><i class="fab fa-facebook"></i></a>
-                    <a href="#" class="hover:text-indigo-500 transition"><i class="fab fa-x-twitter"></i></a>
-                </div>
+            <hr class="my-5 border-white opacity-25">
+            <div class="text-center">
+                <p class="mb-0 text-white opacity-75">&copy; 2024 SmartNet Guatemala. Todos los derechos reservados.</p>
             </div>
         </div>
     </footer>
 
-    <!-- AOS & Swiper JS -->
+    <!-- JS -->
+    <script src="assets_vuexy/vendor/libs/jquery/jquery.js"></script>
+    <script src="assets_vuexy/vendor/libs/popper/popper.js"></script>
+    <script src="assets_vuexy/vendor/js/bootstrap.js"></script>
+    <script src="assets_vuexy/vendor/libs/node-waves/node-waves.js"></script>
+    <script src="assets_vuexy/vendor/libs/swiper/swiper.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     
     <script>
-        AOS.init({ duration: 1200, once: true });
-        
+        AOS.init({ duration: 1000, once: true });
         new Swiper('.hero-swiper', {
             loop: true,
-            speed: 1200,
-            autoplay: { delay: 8000 },
+            autoplay: { delay: 5000 },
             pagination: { el: '.swiper-pagination', clickable: true },
-            navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
-            effect: 'fade', fadeEffect: { crossFade: true },
         });
-
-        window.addEventListener('scroll', () => {
-            const h = document.documentElement;
-            const b = document.body;
-            const percent = (h.scrollTop || b.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
-            document.getElementById('progress-bar').style.width = percent + '%';
-        });
+        window.onscroll = function() {
+            let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            let scrolled = (winScroll / height) * 100;
+            document.getElementById("progress-bar").style.width = scrolled + "%";
+        };
     </script>
 </body>
 </html>
