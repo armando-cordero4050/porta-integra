@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
-    <title>SENTRY | Integración Tecnológica & Seguridad de Élite</title>
+    <title>SENTRY | Soluciones Tecnológicas de Élite</title>
     
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="assets/logo.png" />
@@ -12,13 +12,13 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 
     <!-- Icons -->
     <link rel="stylesheet" href="assets_vuexy/vendor/fonts/tabler-icons.css" />
     <link href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" rel="stylesheet">
 
-    <!-- Core CSS (Vuexy) -->
+    <!-- Core CSS -->
     <link rel="stylesheet" href="assets_vuexy/vendor/css/core.css" />
     <link rel="stylesheet" href="assets_vuexy/css/demo.css" />
     <link rel="stylesheet" href="assets_vuexy/vendor/css/pages/front-page.css" />
@@ -28,41 +28,162 @@
     <link rel="stylesheet" href="assets_vuexy/vendor/libs/swiper/swiper.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
 
-    <!-- Page CSS -->
-    <link rel="stylesheet" href="assets_vuexy/vendor/css/pages/front-page-landing.css" />
-
     <style>
         :root {
-            --primary-gradient: linear-gradient(135deg, #001524 0%, #15616d 100%);
-            --accent-gradient: linear-gradient(135deg, #7367f0 0%, #ce93d8 100%);
-            --sentry-blue: #001524;
-            --sentry-teal: #15616d;
+            --sentry-primary: #6366f1; /* Indigo vibrant */
+            --sentry-dark: #0f172a;
+            --sentry-accent: #10b981; /* Emerald */
+            --sentry-bg: #ffffff;
+            --sentry-text: #334155;
+            --sentry-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
         }
-        body { font-family: 'Outfit', 'Public Sans', sans-serif !important; background-color: #fff; }
-        .hero-section { background: #fff; padding: 120px 0; overflow: hidden; }
-        .gradient-text { background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 800; }
-        .service-card { transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); border-radius: 2.5rem !important; border: 1px solid rgba(0, 21, 36, 0.08) !important; background: #fff; cursor: pointer; }
-        .service-card:hover { transform: translateY(-15px) scale(1.02); box-shadow: 0 20px 40px rgba(0, 21, 36, 0.1) !important; background: #fdfdff; }
-        .img-isometric { max-width: 100%; height: auto; transition: transform 0.5s ease; }
-        .floating { animation: float 6s ease-in-out infinite; }
-        @keyframes float { 0%, 100% { transform: translateY(0px) rotate(0deg); } 50% { transform: translateY(-20px) rotate(1deg); } }
-        .navbar { backdrop-filter: blur(15px); background: rgba(255, 255, 255, 0.8) !important; height: 90px; border-bottom: 1px solid rgba(0,0,0,0.05); }
-        .btn-primary { background: var(--primary-gradient) !important; border: none !important; border-radius: 50px !important; padding: 12px 30px !important; color: #fff !important; }
-        .btn-whatsapp { background: #25d366 !important; border: none !important; border-radius: 50px !important; padding: 12px 30px !important; color: #fff !important; font-weight: 700; display: inline-flex; align-items: center; }
-        .btn-whatsapp i { font-size: 1.4rem; margin-right: 8px; }
-        #progress-bar { position: fixed; top: 0; left: 0; height: 5px; background: var(--accent-gradient); width: 0%; z-index: 9999; }
-        .section-title { font-weight: 800; letter-spacing: -1px; color: var(--sentry-blue); }
-        .bg-light-blue { background-color: #f8faff; }
         
-        /* Modal Styles */
-        .modal-content { border-radius: 2rem !important; border: none !important; box-shadow: 0 2rem 5rem rgba(0,0,0,0.1) !important; }
-        .modal-header { border-bottom: none !important; padding: 2.5rem 2.5rem 1rem !important; }
-        .modal-body { padding: 1rem 2.5rem 2.5rem !important; }
-        .tech-badge { background: #f3f2ff; color: #7367f0; padding: 0.5rem 1rem; border-radius: 50px; font-weight: 600; font-size: 0.85rem; margin-right: 0.5rem; margin-bottom: 0.5rem; display: inline-block; }
-        .experience-box { background: #f8faff; border-radius: 1.5rem; padding: 1.5rem; border-left: 5px solid var(--sentry-teal); }
-        .modal-ppt-img { border-radius: 1.5rem; width: 100%; height: auto; box-shadow: 0 10px 30px rgba(0,0,0,0.1); margin-bottom: 2rem; }
+        body { 
+            font-family: 'Outfit', sans-serif !important; 
+            color: var(--sentry-text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navbar Styling */
+        .navbar {
+            height: 85px;
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.9) !important;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+        .navbar-brand .brand-name {
+            font-size: 1.8rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            color: var(--sentry-dark);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            padding: 160px 0 100px;
+            background: radial-gradient(circle at top right, rgba(99, 102, 241, 0.05), transparent),
+                        radial-gradient(circle at bottom left, rgba(168, 85, 247, 0.05), transparent);
+        }
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 800;
+            line-height: 1.1;
+            letter-spacing: -2px;
+            color: var(--sentry-dark);
+            margin-bottom: 1.5rem;
+        }
+        .text-gradient {
+            background: var(--sentry-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Service Cards - Premium Isometric Look */
+        .services-section { padding: 100px 0; background: #fbfcfe; }
+        .service-card {
+            background: #fff;
+            border-radius: 2.5rem;
+            padding: 3rem 2rem;
+            text-align: center;
+            border: 1px solid rgba(0,0,0,0.03);
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            cursor: pointer;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+        .service-card::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--sentry-gradient);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 0;
+        }
+        .service-card:hover {
+            transform: translateY(-20px) scale(1.02);
+            box-shadow: 0 40px 80px rgba(99, 102, 241, 0.12);
+        }
+        .service-card:hover .service-content { color: #fff; position: relative; z-index: 1; }
+        .service-card:hover .text-muted { color: rgba(255,255,255,0.8) !important; }
+        .service-card:hover::after { opacity: 1; }
         
-        .brand-name { font-weight: 900; color: var(--sentry-blue); text-transform: uppercase; letter-spacing: 2px; }
+        .icon-box {
+            width: 180px;
+            height: 180px;
+            margin: 0 auto 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f8fafc;
+            border-radius: 2rem;
+            transition: all 0.4s ease;
+        }
+        .service-card:hover .icon-box { background: rgba(255,255,255,0.2); }
+        .service-card img { width: 140px; height: 140px; object-fit: contain; }
+
+        /* Buttons */
+        .btn-expert {
+            background: #25d366;
+            color: #fff !important;
+            border-radius: 50px;
+            padding: 14px 32px;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            border: none;
+            box-shadow: 0 10px 20px rgba(37, 211, 102, 0.2);
+        }
+        .btn-expert:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(37, 211, 102, 0.3);
+            filter: brightness(1.1);
+        }
+
+        /* Modal Enhancements */
+        .modal-content {
+            border-radius: 3rem !important;
+            border: none !important;
+            overflow: hidden;
+        }
+        .modal-header-gradient {
+            background: var(--sentry-gradient);
+            padding: 4rem 3rem 2rem;
+            color: #fff;
+        }
+        .modal-body { padding: 3rem; }
+        .feature-list li {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            font-size: 1.1rem;
+        }
+        .feature-list i { color: var(--sentry-primary); font-size: 1.4rem; list-style: none;}
+
+        /* Client Section */
+        .client-logo {
+            filter: grayscale(1);
+            opacity: 0.5;
+            transition: all 0.3s ease;
+            max-height: 50px;
+        }
+        .client-logo:hover { filter: grayscale(0); opacity: 1; transform: scale(1.1); }
+
+        #progress-bar {
+            position: fixed; top: 0; left: 0; height: 6px;
+            background: var(--sentry-gradient);
+            width: 0%; z-index: 9999;
+        }
+
+        .floating { animation: float 5s ease-in-out infinite; }
+        @keyframes float { 0% { transform: translateY(0); } 50% { transform: translateY(-15px); } 100% { transform: translateY(0); } }
+
     </style>
 </head>
 
@@ -70,348 +191,375 @@
     <div id="progress-bar"></div>
 
     <!-- Navbar -->
-    <nav class="layout-navbar shadow-none py-0">
-        <div class="container-xxl">
-            <div class="navbar navbar-expand-lg landing-navbar px-3 px-md-4">
-                <div class="navbar-brand app-brand demo d-flex py-0 me-4 ms-0">
-                    <a href="index.html" class="app-brand-link">
-                        <img src="assets/logo.png" alt="SENTRY" style="height: 45px;" class="animate__animated animate__fadeInLeft">
-                        <span class="app-brand-text demo menu-text brand-name ms-2" style="font-size: 1.8rem;">SENTRY</span>
-                    </a>
-                </div>
-                <div class="collapse navbar-collapse landing-nav-menu" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto">
-                        <li class="nav-item"><a class="nav-link fw-bold" href="#inicio">Inicio</a></li>
-                        <li class="nav-item"><a class="nav-link fw-bold" href="#servicios">Servicios</a></li>
-                        <li class="nav-item"><a class="nav-link fw-bold" href="#sentry">SENTRY Core</a></li>
-                        <li class="nav-item"><a class="nav-link fw-bold" href="#casos">Clientes</a></li>
-                    </ul>
-                </div>
-                <div class="ms-auto">
-                    <a href="https://wa.me/50252025252" target="_blank" class="btn btn-whatsapp d-none d-md-inline-flex">
-                        <i class="ti ti-brand-whatsapp"></i> Hablar con un Experto
+    <nav class="layout-navbar navbar navbar-expand-lg">
+        <div class="container">
+            <a href="index.html" class="navbar-brand d-flex align-items-center">
+                <img src="assets/logo.png" alt="SENTRY" height="50" class="me-2">
+                <span class="brand-name">SENTRY</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navMain">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item"><a class="nav-link fw-bold" href="#inicio">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link fw-bold" href="#servicios">Servicios</a></li>
+                    <li class="nav-item"><a class="nav-link fw-bold" href="#clientes">Clientes</a></li>
+                </ul>
+                <div class="d-flex">
+                    <a href="https://wa.me/50252025252" target="_blank" class="btn-expert">
+                        <i class="ti ti-brand-whatsapp fs-3"></i> Hablar con un Experto
                     </a>
                 </div>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
+    <!-- Hero -->
     <section id="inicio" class="hero-section">
-        <div class="container-xxl">
-            <div class="row align-items-center g-5">
-                <div class="col-lg-6 text-center text-lg-start">
-                    <div class="animate__animated animate__fadeInDown">
-                        <span class="badge bg-label-primary px-3 py-2 mb-3 fw-bold rounded-pill">SENTINEL OF TECHNOLOGY</span>
-                        <h1 class="display-3 fw-extrabold mb-4">Integración Total, Seguridad de <br><span class="gradient-text">Élite Absoluta</span></h1>
-                        <p class="lead mb-5 text-muted fw-medium" style="font-size: 1.25rem;">SENTRY: La fuerza invisible que protege su infraestructura y potencia su visión de negocio.</p>
-                        <div class="d-flex flex-wrap justify-content-center justify-content-lg-start gap-3">
-                            <a href="#servicios" class="btn btn-primary btn-lg px-5">Explorar Soluciones</a>
-                            <a href="https://wa.me/50252025252" target="_blank" class="btn btn-whatsapp btn-lg px-5">
-                                <i class="ti ti-brand-whatsapp"></i> Chat Directo
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="animate__animated animate__zoomIn">
-                        <img src="portafolio/Slide1.jpg" alt="SENTRY Core" class="img-fluid floating shadow-lg rounded-5">
-                    </div>
+        <div class="container text-center">
+            <div data-aos="zoom-out" data-aos-duration="1200">
+                <span class="badge bg-label-primary rounded-pill px-4 py-2 mb-4 fw-bold animate__animated animate__fadeIn">SENTINEL OF TECHNOLOGY</span>
+                <h1 class="hero-title animate__animated animate__fadeInUp">
+                    Protegiendo su Futuro con <br><span class="text-gradient">Innovación Absoluta</span>
+                </h1>
+                <p class="lead mx-auto mb-5 text-muted fw-medium" style="max-width: 800px; font-size: 1.3rem;">
+                    En SENTRY fusionamos servicios de vanguardia en seguridad, infraestructura y software para impulsar la conectividad inteligente y segura de su negocio.
+                </p>
+                <div class="d-flex justify-content-center gap-4 animate__animated animate__fadeInUp animate__delay-1s">
+                    <a href="#servicios" class="btn btn-primary btn-xl rounded-pill px-5 py-3 fs-5 fw-bold">Nuestros Servicios</a>
+                    <a href="https://wa.me/50252025252" target="_blank" class="btn btn-expert fs-5">Chat Directo</a>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Services Grid -->
-    <section id="servicios" class="py-10 bg-light-blue">
-        <div class="container-xxl py-5">
-            <div class="text-center mb-5" data-aos="fade-up">
-                <h2 class="display-5 fw-bold section-title mb-3">Ecosistema SENTRY</h2>
-                <div class="mx-auto bg-primary rounded-pill mb-4" style="width: 80px; height: 5px;"></div>
-                <p class="text-muted lead">Soluciones integrales de grado empresarial para la era digital.</p>
+    <section id="servicios" class="services-section">
+        <div class="container text-center">
+            <div class="mb-5" data-aos="fade-up">
+                <h2 class="display-4 fw-800 text-dark mb-3">Ecosistema de Soluciones</h2>
+                <p class="text-muted">Excelencia tecnológica aplicada a cada nicho crítico de su empresa.</p>
             </div>
-            
-            <div class="row g-4">
-                <!-- Software -->
+
+            <div class="row g-5 mt-4">
+                <!-- 1. Software -->
                 <div class="col-lg-4 col-md-6" data-aos="fade-up" data-bs-toggle="modal" data-bs-target="#modalSoftware">
-                    <div class="card service-card h-100 p-4 text-center shadow-none">
-                        <div class="p-3 mb-4 rounded-4 bg-label-primary d-inline-block mx-auto">
-                            <img src="assets/software.png" class="img-isometric" style="height: 150px;">
+                    <div class="service-card shadow-sm">
+                        <div class="service-content">
+                            <div class="icon-box">
+                                <img src="assets/software.png" class="floating">
+                            </div>
+                            <h3 class="fw-bold mb-3">Software & Aplicaciones</h3>
+                            <p class="text-muted mb-4">Ingeniería a medida, ERPs y soluciones móviles diseñadas para escalar su productividad.</p>
+                            <span class="fw-bold text-primary">Ver Capacidades <i class="ti ti-chevron-right"></i></span>
                         </div>
-                        <h3 class="fw-bold mb-3">Software & IA</h3>
-                        <p class="small text-muted">Ingeniería a medida y algoritmos de optimización.</p>
-                        <span class="text-primary fw-bold mt-auto">Detalles <i class="ti ti-arrow-right"></i></span>
                     </div>
                 </div>
-                <!-- Seguridad Electrónica -->
+
+                <!-- 2. Seguridad Electrónica -->
                 <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100" data-bs-toggle="modal" data-bs-target="#modalSeguridad">
-                    <div class="card service-card h-100 p-4 text-center shadow-none">
-                        <div class="p-3 mb-4 rounded-4 bg-label-success d-inline-block mx-auto">
-                            <img src="assets/seguridad.png" class="img-isometric" style="height: 150px;">
+                    <div class="service-card shadow-sm">
+                        <div class="service-content">
+                            <div class="icon-box">
+                                <img src="assets/seguridad.png" class="floating">
+                            </div>
+                            <h3 class="fw-bold mb-3">Seguridad Electrónica</h3>
+                            <p class="text-muted mb-4">Vigilancia inteligente con analítica de IA, biometría y control perimetral táctico.</p>
+                            <span class="fw-bold text-primary">Ver Blindaje <i class="ti ti-chevron-right"></i></span>
                         </div>
-                        <h3 class="fw-bold mb-3">Seguridad Electrónica</h3>
-                        <p class="small text-muted">Vigilancia moscovita-proactiva y biometría.</p>
-                        <span class="text-success fw-bold mt-auto">Detalles <i class="ti ti-arrow-right"></i></span>
                     </div>
                 </div>
-                <!-- Ciberseguridad -->
+
+                <!-- 3. Ciberseguridad -->
                 <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200" data-bs-toggle="modal" data-bs-target="#modalCiber">
-                    <div class="card service-card h-100 p-4 text-center shadow-none">
-                        <div class="p-3 mb-4 rounded-4 bg-label-danger d-inline-block mx-auto">
-                            <img src="assets/ciberseguridad.png" class="img-isometric" style="height: 150px;">
+                    <div class="service-card shadow-sm">
+                        <div class="service-content">
+                            <div class="icon-box">
+                                <img src="assets/ciberseguridad.png" class="floating">
+                            </div>
+                            <h3 class="fw-bold mb-3">Ciberseguridad</h3>
+                            <p class="text-muted mb-4">Protección Zero Trust de datos críticos, auditorías IT y defensa contra ransomware.</p>
+                            <span class="fw-bold text-primary">Ver Estrategia <i class="ti ti-chevron-right"></i></span>
                         </div>
-                        <h3 class="fw-bold mb-3">Ciberseguridad</h3>
-                        <p class="small text-muted">Blindaje Zero Trust y SOC 24x7.</p>
-                        <span class="text-danger fw-bold mt-auto">Detalles <i class="ti ti-arrow-right"></i></span>
                     </div>
                 </div>
-                <!-- Infraestructura -->
-                <div class="col-lg-3 col-md-6" data-aos="fade-up" data-bs-toggle="modal" data-bs-target="#modalRedes">
-                    <div class="card service-card h-100 p-4 text-center shadow-none">
-                        <div class="p-3 mb-4 rounded-4 bg-label-info d-inline-block mx-auto">
-                            <img src="assets/redes.png" class="img-isometric" style="height: 150px;">
+
+                <!-- 4. Infraestructura de Redes -->
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-bs-toggle="modal" data-bs-target="#modalRedes">
+                    <div class="service-card shadow-sm">
+                        <div class="service-content">
+                            <div class="icon-box">
+                                <img src="assets/redes.png" class="floating">
+                            </div>
+                            <h3 class="fw-bold mb-3">Infraestructura de Redes</h3>
+                            <p class="text-muted mb-4">Backbone de fibra óptica, Wi-Fi 6 de alta densidad y telefonía IP avanzada.</p>
+                            <span class="fw-bold text-primary">Ver Ingeniería <i class="ti ti-chevron-right"></i></span>
                         </div>
-                        <h3 class="fw-bold mb-3">Infraestructura</h3>
-                        <p class="small text-muted">Fiber Backbone y Wi-Fi de alta densidad.</p>
-                        <span class="text-info fw-bold mt-auto">Detalles <i class="ti ti-arrow-right"></i></span>
                     </div>
                 </div>
-                <!-- Nube -->
-                <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100" data-bs-toggle="modal" data-bs-target="#modalNube">
-                    <div class="card service-card h-100 p-4 text-center shadow-none">
-                        <div class="p-3 mb-4 rounded-4 bg-label-warning d-inline-block mx-auto">
-                            <img src="assets/nube.png" class="img-isometric" style="height: 150px;">
+
+                <!-- 5. Cloud Services -->
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100" data-bs-toggle="modal" data-bs-target="#modalCloud">
+                    <div class="service-card shadow-sm">
+                        <div class="service-content">
+                            <div class="icon-box">
+                                <img src="assets/nube.png" class="floating">
+                            </div>
+                            <h3 class="fw-bold mb-3">SENTRY Cloud</h3>
+                            <p class="text-muted mb-4">Gestión de infraestructuras elásticas, backups inmutables y migración segura a la nube.</p>
+                            <span class="fw-bold text-primary">Ver Ecosistema <i class="ti ti-chevron-right"></i></span>
                         </div>
-                        <h3 class="fw-bold mb-3">Cloud Strategy</h3>
-                        <p class="small text-muted">AWS/Azure/GCP Migration & Management.</p>
-                        <span class="text-warning fw-bold mt-auto">Detalles <i class="ti ti-arrow-right"></i></span>
                     </div>
                 </div>
-                <!-- Energía -->
-                <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="200" data-bs-toggle="modal" data-bs-target="#modalEnergia">
-                    <div class="card service-card h-100 p-4 text-center shadow-none">
-                        <div class="p-3 mb-4 rounded-4 bg-label-secondary d-inline-block mx-auto">
-                            <img src="assets/energia.png" class="img-isometric" style="height: 150px;">
+
+                <!-- 6. Energía y UPS -->
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200" data-bs-toggle="modal" data-bs-target="#modalEnergia">
+                    <div class="service-card shadow-sm">
+                        <div class="service-content">
+                            <div class="icon-box">
+                                <img src="assets/energia.png" class="floating">
+                            </div>
+                            <h3 class="fw-bold mb-3">Energía Renovable</h3>
+                            <p class="text-muted mb-4">Sistemas solares industriales y respaldo crítico con tecnología de Litio LiFePO4.</p>
+                            <span class="fw-bold text-primary">Ver Respaldo <i class="ti ti-chevron-right"></i></span>
                         </div>
-                        <h3 class="fw-bold mb-3">Respaldo Solar</h3>
-                        <p class="small text-muted">UPS de Litio y backup solar industrial.</p>
-                        <span class="text-secondary fw-bold mt-auto">Detalles <i class="ti ti-arrow-right"></i></span>
                     </div>
                 </div>
-                <!-- Hosting -->
-                <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="300" data-bs-toggle="modal" data-bs-target="#modalHosting">
-                    <div class="card service-card h-100 p-4 text-center shadow-none">
-                        <div class="p-3 mb-4 rounded-4 bg-label-primary d-inline-block mx-auto" style="background-color: #e8eaf6 !important;">
-                            <img src="assets/nube.png" class="img-isometric" style="height: 150px; filter: hue-rotate(45deg);">
+
+                <!-- 7. Hosting (Nuevo) -->
+                <div class="col-lg-12 mt-5 text-center" data-aos="zoom-in" data-bs-toggle="modal" data-bs-target="#modalHosting">
+                    <div class="service-card shadow-sm" style="max-width: 600px; margin: 0 auto; padding: 2rem;">
+                        <div class="service-content d-flex align-items-center gap-4 text-start">
+                            <div class="icon-box mb-0" style="width: 100px; height: 100px;">
+                                <img src="assets/nube.png" style="width: 70px; height: 70px; filter: hue-rotate(90deg);">
+                            </div>
+                            <div>
+                                <h3 class="fw-bold mb-2">SENTRY Hosting Élite</h3>
+                                <p class="text-muted mb-0 small">Dominios, Servidores NVMe de alta velocidad y backups diarios garantizados.</p>
+                            </div>
+                            <span class="ms-auto fw-bold text-primary"><i class="ti ti-arrow-up-right fs-2"></i></span>
                         </div>
-                        <h3 class="fw-bold mb-3">Hosting Elite</h3>
-                        <p class="small text-muted">Servidores de alta velocidad y SSL gratuito.</p>
-                        <span class="text-primary fw-bold mt-auto">Detalles <i class="ti ti-arrow-right"></i></span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- SENTRY Core Module -->
-    <section id="sentry" class="py-10 bg-white">
-        <div class="container-xxl">
-            <div class="row align-items-center g-5">
-                <div class="col-lg-6" data-aos="fade-right">
-                    <span class="badge bg-label-primary mb-3">SENTRY SOFTWARE</span>
-                    <h2 class="display-5 fw-bold mb-4">SENTRY: Vigilancia Inteligente</h2>
-                    <p class="lead mb-5 text-muted">El cerebro detector de amenazas que centraliza CCTV, Drones, Biometría y GPS en una sola terminal táctica.</p>
-                    <div class="row g-4">
-                        <div class="col-6">
-                            <h5 class="fw-bold"><i class="ti ti-eye text-primary me-2"></i> Monitoreo NOC</h5>
-                            <p class="small text-muted">Respuesta táctica 24/7/365.</p>
-                        </div>
-                        <div class="col-6">
-                            <h5 class="fw-bold"><i class="ti ti-drone text-primary me-2"></i> Drone Patrol</h5>
-                            <p class="small text-muted">Perímetros custodiados desde el aire.</p>
-                        </div>
-                    </div>
-                    <div class="mt-5">
-                        <a href="https://wa.me/50252025252" target="_blank" class="btn btn-whatsapp text-white">Descargar Brochure SENTRY</a>
-                    </div>
-                </div>
-                <div class="col-lg-6" data-aos="fade-left">
-                    <img src="portafolio/Slide10.jpg" class="img-fluid floating rounded-5 shadow-2xl">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Brands -->
-    <section id="casos" class="py-10 bg-body">
-        <div class="container-xxl">
-            <div class="text-center mb-5" data-aos="fade-up">
-                <h3 class="fw-bold mb-5">Integradores de Confianza para Líderes Mundiales</h3>
-                <div class="swiper-partners overflow-hidden">
-                    <div class="swiper" id="swiper-partners">
-                        <div class="swiper-wrapper align-items-center">
-                            <div class="swiper-slide text-center"><img src="https://upload.wikimedia.org/wikipedia/commons/4/4e/Tigo_logo.png" class="client-logo img-fluid" style="width: 80px;"></div>
-                            <div class="swiper-slide text-center"><img src="https://upload.wikimedia.org/wikipedia/commons/0/05/Banco_Azteca_logo.svg" class="client-logo img-fluid" style="width: 120px;"></div>
-                            <div class="swiper-slide text-center"><img src="https://upload.wikimedia.org/wikipedia/en/thumb/e/e8/Shell_logo.svg/1200px-Shell_logo.svg.png" class="client-logo img-fluid" style="width: 60px;"></div>
-                            <div class="swiper-slide text-center"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Samsung_Logo.svg/2560px-Samsung_Logo.svg.png" class="client-logo img-fluid" style="width: 120px;"></div>
-                            <div class="swiper-slide text-center"><h4 class="fw-bold text-muted opacity-50">TELUS</h4></div>
-                            <div class="swiper-slide text-center"><h4 class="fw-bold text-muted opacity-50">CISCO</h4></div>
-                            <div class="swiper-slide text-center"><h4 class="fw-bold text-muted opacity-50">UBIQUITI</h4></div>
-                            <div class="swiper-slide text-center"><h4 class="fw-bold text-muted opacity-50">HIKVISION</h4></div>
-                            <div class="swiper-slide text-center"><h4 class="fw-bold text-muted opacity-50">FORTINET</h4></div>
-                        </div>
-                    </div>
+    <!-- Clients -->
+    <section id="clientes" class="py-10 bg-white">
+        <div class="container text-center">
+            <h4 class="fw-bold text-muted mb-5 opacity-75">SENTRY ES CONFIADO POR LÍDERES LÍDERES EN LA REGIÓN</h4>
+            <div class="swiper" id="clientSwiper">
+                <div class="swiper-wrapper align-items-center">
+                    <div class="swiper-slide"><img src="https://upload.wikimedia.org/wikipedia/commons/4/4e/Tigo_logo.png" class="client-logo"></div>
+                    <div class="swiper-slide"><img src="https://upload.wikimedia.org/wikipedia/commons/0/05/Banco_Azteca_logo.svg" class="client-logo"></div>
+                    <div class="swiper-slide"><img src="https://upload.wikimedia.org/wikipedia/en/thumb/e/e8/Shell_logo.svg/1200px-Shell_logo.svg.png" class="client-logo"></div>
+                    <div class="swiper-slide"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Samsung_Logo.svg/2560px-Samsung_Logo.svg.png" class="client-logo"></div>
+                    <div class="swiper-slide"><span class="h4 fw-bold text-muted opacity-50">DISAGRO</span></div>
+                    <div class="swiper-slide"><span class="h4 fw-bold text-muted opacity-50">WAYAK</span></div>
+                    <div class="swiper-slide"><span class="h4 fw-bold text-muted opacity-50">MAXIAGRO</span></div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="footer bg-primary text-white py-5">
-        <div class="container-xxl">
+    <footer class="py-10 bg-dark text-white">
+        <div class="container">
             <div class="row g-5">
                 <div class="col-lg-6">
-                    <img src="assets/logo.png" style="height: 50px; filter: brightness(0) invert(1);" class="mb-4">
-                    <h5 class="text-white brand-name">SENTRY</h5>
-                    <p class="text-white opacity-75">Sentinel of Technology. Integración de vanguardia en seguridad y tecnología para la región de Centroamérica.</p>
-                </div>
-                <div class="col-lg-6 text-lg-end">
-                    <h4 class="text-white mb-4">+502 5202-5252</h4>
-                    <p class="text-white">ventas@sentry.com.gt</p>
-                    <div class="d-flex justify-content-lg-end gap-3">
-                        <a href="https://wa.me/50252025252" target="_blank" class="text-white"><i class="ti ti-brand-whatsapp fs-2"></i></a>
-                        <i class="ti ti-brand-linkedin fs-2"></i>
+                    <div class="d-flex align-items-center mb-4">
+                        <img src="assets/logo.png" height="50" class="me-3" style="filter: brightness(0) invert(1);">
+                        <h2 class="text-white fw-bold mb-0">SENTRY</h2>
+                    </div>
+                    <p class="lead text-white opacity-75 mb-5" style="max-width: 450px;">
+                        Integradores expertos en soluciones tecnológicas de alto impacto. Sostenibilidad, innovación y seguridad total.
+                    </p>
+                    <div class="d-flex gap-3">
+                        <a href="https://wa.me/50252025252" class="btn btn-expert px-4 py-2">WhatsApp Directo</a>
                     </div>
                 </div>
-            </div>
-            <hr class="my-5 border-white opacity-25">
-            <div class="text-center">
-                <p>&copy; 2024 SENTRY | Todos los derechos reservados</p>
+                <div class="col-lg-6 text-lg-end">
+                    <h3 class="text-white fw-bold mb-4">+502 5202-5252</h3>
+                    <p class="text-white opacity-75 fs-5">ventas@sentrygt.com</p>
+                    <p class="text-white opacity-50 mt-5 small">&copy; 2024 SENTRY. Todos los derechos reservados.</p>
+                </div>
             </div>
         </div>
     </footer>
 
-    <!-- MODALS -->
-    
-    <!-- Modal Software -->
-    <div class="modal fade" id="modalSoftware" tabindex="-1" aria-hidden="true">
+    <!-- MODALES CON INFORMACION EXTRACTADA DE SLIDES -->
+
+    <!-- Modal Software (Slide 4) -->
+    <div class="modal fade" id="modalSoftware" tabindex="-1">
         <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h3 class="fw-bold mb-0">Software & IA Engineering</h3>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="modal-header-gradient">
+                    <h2 class="fw-bold mb-2">Desarrollo de Software</h2>
+                    <p class="mb-0 opacity-75">Ecosistema Digital a Medida</p>
                 </div>
                 <div class="modal-body">
-                    <img src="portafolio/Slide2.jpg" class="modal-ppt-img">
-                    <h5 class="fw-bold mb-3">Eficiencia mediante Algoritmos</h5>
-                    <p class="text-muted">Desarrollamos soluciones que no solo operan, sino que aprenden. Desde integraciones FEL masivas hasta dashboards tácticos para seguridad compleja.</p>
-                    <div class="experience-box mt-4">
-                        <span class="tech-badge">Python / AI</span>
-                        <span class="tech-badge">Node.js</span>
-                        <span class="tech-badge">Big Data</span>
+                    <h4 class="fw-bold mb-4">Optimización mediante Aplicaciones</h4>
+                    <ul class="feature-list list-unstyled">
+                        <li><i class="ti ti-circle-check"></i> <strong>Sistemas a Medida:</strong> Diseño y desarrollo 100% ajustado a sus procesos core.</li>
+                        <li><i class="ti ti-circle-check"></i> <strong>Apps Web & Móviles:</strong> Presencia efectiva en cualquier dispositivo y sistema operativo.</li>
+                        <li><i class="ti ti-circle-check"></i> <strong>Sistemas de Gestión:</strong> ERPs, CRMs y módulos para Hoteles, Clínicas y Oficinas Jurídicas.</li>
+                        <li><i class="ti ti-circle-check"></i> <strong>Administración Educativa:</strong> Plataformas para centros escolares y universidades.</li>
+                    </ul>
+                    <hr class="my-5">
+                    <div class="row align-items-center">
+                        <div class="col-sm-8">
+                            <h5 class="fw-bold">¿Necesita un ERP o CRM específico?</h5>
+                            <p class="text-muted small mb-0">Nuestros analistas diseñan el flujo lógico antes de escribir una sola línea de código.</p>
+                        </div>
+                        <div class="col-sm-4 text-end">
+                            <a href="https://wa.me/50252025252" target="_blank" class="btn btn-expert">Cotizar</a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Modal Seguridad -->
-    <div class="modal fade" id="modalSeguridad" tabindex="-1" aria-hidden="true">
+    <!-- Modal Seguridad (Slide 5) -->
+    <div class="modal fade" id="modalSeguridad" tabindex="-1">
         <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h3 class="fw-bold mb-0">Seguridad Electrónica Proactiva</h3>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="modal-header-gradient" style="background: linear-gradient(135deg, #059669 0%, #10b981 100%);">
+                    <h2 class="fw-bold mb-2">Seguridad Electrónica</h2>
+                    <p class="mb-0 opacity-75">Sistemas de Protección Táctica</p>
                 </div>
                 <div class="modal-body">
-                    <img src="portafolio/Slide3.jpg" class="modal-ppt-img">
-                    <p class="text-muted">Vigilancia integral de grado militar. Cámaras de visión térmica, reconocimiento facial basado en patrones y alertas automáticas de intrusión.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal Ciberseguridad -->
-    <div class="modal fade" id="modalCiber" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h3 class="fw-bold mb-0">Ciberseguridad Elite</h3>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <img src="portafolio/Slide4.jpg" class="modal-ppt-img">
-                    <p class="text-muted">Protegemos su red contra ransomware mediante arquitecturas Zero Trust y auditorías constantes de vulnerabilidades.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal Redes -->
-    <div class="modal fade" id="modalRedes" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h3 class="fw-bold mb-0">Infraestructura Crítica</h3>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <img src="portafolio/Slide5.jpg" class="modal-ppt-img">
-                    <p class="text-muted">Diseño de Redes de Datos con backbone de fibra óptica y soluciones Wi-Fi 6E certificadas por marcas como Cisco y Ubiquiti.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal Nube -->
-    <div class="modal fade" id="modalNube" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h3 class="fw-bold mb-0">Cloud Migration Strategy</h3>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <img src="portafolio/Slide6.jpg" class="modal-ppt-img">
-                    <p class="text-muted">Llevamos su infraestructura física a modelos elásticos en AWS y Azure, reduciendo costos operativos drásticamente.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal Energía -->
-    <div class="modal fade" id="modalEnergia" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h3 class="fw-bold mb-0">Energía Renovable & Respaldo</h3>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <img src="portafolio/Slide7.jpg" class="modal-ppt-img">
-                    <p class="text-muted">Continuidad operativa mediante UPS de litio y sistemas solares inyectables de alta eficiencia Victron Energy.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal Hosting -->
-    <div class="modal fade" id="modalHosting" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h3 class="fw-bold mb-0">Hosting Elite & Dominios</h3>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <img src="portafolio/Slide8.jpg" class="modal-ppt-img">
-                    <h5 class="fw-bold mb-3">Tu presencia digital, segura.</h5>
-                    <p class="text-muted">Servidores de alta velocidad con discos NVMe, certificados SSL gratuitos incluidos, backups diarios y soporte técnico especializado disponible 24/7 para garantizar que su sitio web esté siempre en línea.</p>
-                    <ul class="list-unstyled mt-4 small">
-                        <li>• <i class="ti ti-check text-success me-2"></i> Alta Disponibilidad 99.9%</li>
-                        <li>• <i class="ti ti-check text-success me-2"></i> Certificados SSL Gratuitos</li>
-                        <li>• <i class="ti ti-check text-success me-2"></i> Administrador cPanel Premium</li>
+                    <h4 class="fw-bold mb-4">Vigilancia de Grado Militar</h4>
+                    <ul class="feature-list list-unstyled">
+                        <li><i class="ti ti-shield-check"></i> <strong>IA Video Analytics:</strong> CCTV con detección de comportamiento y patrones sospechosos.</li>
+                        <li><i class="ti ti-shield-check"></i> <strong>Monitoreo Remoto:</strong> Control total de cámaras, GPS y alarmas vía App centralizada.</li>
+                        <li><i class="ti ti-shield-check"></i> <strong>Smart Access Control:</strong> Cerraduras inteligentes para Hoteles, Oficinas y Residencias (Biometría).</li>
+                        <li><i class="ti ti-shield-check"></i> <strong>Sistemas Contraincendios:</strong> Detección temprana y protocolos de evacuación automatizados.</li>
                     </ul>
+                    <div class="p-4 bg-label-success rounded-4 mt-5">
+                        <h6 class="fw-bold">Integración SENTRY Core</h6>
+                        <p class="small mb-0">Fusionamos GPS, CCTV y Alarmas en un solo panel de control unificado.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Ciberseguridad (Slide 6) -->
+    <div class="modal fade" id="modalCiber" tabindex="-1">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header-gradient" style="background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%);">
+                    <h2 class="fw-bold mb-2">Ciberseguridad</h2>
+                    <p class="mb-0 opacity-75">Blindaje Digital de Alta Disponibilidad</p>
+                </div>
+                <div class="modal-body">
+                    <h4 class="fw-bold mb-4">Estrategia de Defensa Profunda</h4>
+                    <div class="row g-4">
+                        <div class="col-md-6 text-center p-3 border rounded-4">
+                            <i class="ti ti-lock fs-1 text-danger"></i>
+                            <h6 class="fw-bold mt-2">Perímetro Seguro</h6>
+                            <p class="small text-muted">Firewalls, VPNs y mitigación de ataques externos.</p>
+                        </div>
+                        <div class="col-md-6 text-center p-3 border rounded-4">
+                            <i class="ti ti-license fs-1 text-danger"></i>
+                            <h6 class="fw-bold mt-2">Licenciamiento Genuino</h6>
+                            <p class="small text-muted">Modelos de renta mensual (SaaS) escalables.</p>
+                        </div>
+                    </div>
+                    <ul class="feature-list list-unstyled mt-5">
+                        <li><i class="ti ti-check text-danger"></i> <strong>Políticas Internas:</strong> Garantizamos la integridad de la información confidencial.</li>
+                        <li><i class="ti ti-check text-danger"></i> <strong>Awareness:</strong> Programas de concientización y formación para sus colaboradores.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Redes (Slide 7) -->
+    <div class="modal fade" id="modalRedes" tabindex="-1">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header-gradient" style="background: linear-gradient(135deg, #0284c7 0%, #0ea5e9 100%);">
+                    <h2 class="fw-bold mb-2">Infraestructura de Redes</h2>
+                    <p class="mb-0 opacity-75">Conectividad de Alto Rendimiento</p>
+                </div>
+                <div class="modal-body">
+                    <h4 class="fw-bold mb-4">Diseño de Redes Críticas</h4>
+                    <ul class="feature-list list-unstyled">
+                        <li><i class="ti ti-network"></i> <strong>Fibras Ópticas:</strong> Backbone de datos para voz, video y redundancia total.</li>
+                        <li><i class="ti ti-wifi"></i> <strong>Wi-Fi Pro:</strong> Diseño basado en mapas de calor para cobertura perfecta en Hoteles y Banca.</li>
+                        <li><i class="ti ti-device-landline-phone"></i> <strong>Telefonía IP:</strong> Centrales virtuales y plantas telefónicas de nueva generación.</li>
+                        <li><i class="ti ti-building-skyscraper"></i> <strong>Verticales:</strong> Soluciones para construcción, eventos masivos y banca.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Cloud (Slide 8) -->
+    <div class="modal fade" id="modalCloud" tabindex="-1">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header-gradient" style="background: linear-gradient(135deg, #8b5cf6 0%, #a855f7 100%);">
+                    <h2 class="fw-bold mb-2">SENTRY Cloud Strategy</h2>
+                    <p class="mb-0 opacity-75">Infraestructuras Elásticas e Inmutables</p>
+                </div>
+                <div class="modal-body">
+                    <h4 class="fw-bold mb-4">Servicios Public Cloud & Hybrid</h4>
+                    <ul class="feature-list list-unstyled">
+                        <li><i class="ti ti-cloud-download"></i> <strong>Cloud Backup:</strong> Respaldo de servidores y grabaciones de CCTV.</li>
+                        <li><i class="ti ti-layers-intersect"></i> <strong>Redes Virtuales:</strong> Load balancing, VPNs corporativas y Firewalls virtuales.</li>
+                        <li><i class="ti ti-mail-fast"></i> <strong>Correo Elite:</strong> Plataformas robustas de correo corporativo certificadas.</li>
+                        <li><i class="ti ti-server-cog"></i> <strong>VPS Escalables:</strong> Servidores en la nube configurados para alto tráfico.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Energía (Slide 9) -->
+    <div class="modal fade" id="modalEnergia" tabindex="-1">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header-gradient" style="background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%);">
+                    <h2 class="fw-bold mb-2">Energía Renovable</h2>
+                    <p class="mb-0 opacity-75">Sostenibilidad y Continuidad Crítica</p>
+                </div>
+                <div class="modal-body">
+                    <h4 class="fw-bold mb-4">Respaldo Energético Inteligente</h4>
+                    <ul class="feature-list list-unstyled">
+                        <li><i class="ti ti-sun"></i> <strong>Ingeniería Solar:</strong> Diseño e instalación de sistemas fotovoltaicos inyectables.</li>
+                        <li><i class="ti ti-battery-4"></i> <strong>UPS de Litio:</strong> Respaldo de alta densidad para centros de datos y plantas eléctricas.</li>
+                        <li><i class="ti ti-chart-dots"></i> <strong>Monitoreo Real-Time:</strong> Control constante de flujos energéticos y eficiencia.</li>
+                        <li><i class="ti ti-leaf"></i> <strong>Impacto Ambiental:</strong> Evaluaciones y certificaciones de reducción de huella de carbono.</li>
+                    </ul>
+                    <p class="text-muted mt-5 small fst-italic">"Educamos y concientizamos sobre la integración de energías renovables en redes inteligentes."</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Hosting (Added) -->
+    <div class="modal fade" id="modalHosting" tabindex="-1">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header-gradient" style="background: linear-gradient(135deg, #1e293b 0%, #334155 100%);">
+                    <h2 class="fw-bold mb-2">Hosting Élite & Dominios</h2>
+                    <p class="mb-0 opacity-75">Tu Hogar Digital de Alta Velocidad</p>
+                </div>
+                <div class="modal-body">
+                    <h4 class="fw-bold mb-4">Potencia y Velocidad NVMe</h4>
+                    <p>En SENTRY garantizamos que su sitio web sea una herramienta de venta imparable con tiempos de carga líderes en el mercado guatemalteco.</p>
+                    <ul class="feature-list list-unstyled mt-5">
+                        <li><i class="ti ti-rocket"></i> <strong>Almacenamiento NVMe:</strong> 10x más rápido que discos SSD tradicionales.</li>
+                        <li><i class="ti ti-certificate"></i> <strong>SSL Gratis Perpetuo:</strong> Seguridad total para sus visitantes.</li>
+                        <li><i class="ti ti-backup"></i> <strong>Daily Backups:</strong> Copias de seguridad automáticas de cada archivo y base de datos.</li>
+                        <li><i class="ti ti-headset"></i> <strong>Soporte 24/7/365:</strong> Un equipo experto siempre listo para asistirle.</li>
+                    </ul>
+                    <a href="https://wa.me/50252025252" target="_blank" class="btn btn-expert w-100 py-3 mt-4">Consultar Planes de Hosting</a>
                 </div>
             </div>
         </div>
@@ -428,7 +576,7 @@
     <script>
         AOS.init({ duration: 1000, once: true });
         
-        new Swiper('#swiper-partners', {
+        new Swiper('#clientSwiper', {
             slidesPerView: 2,
             spaceBetween: 50,
             autoplay: { delay: 2000 },
